@@ -1,0 +1,10 @@
+extends ../layout/common
+
+block content
+  h1 Profile
+  ul
+    li= user.name
+    li= user.phone
+    li= user.email
+  
+  a.btn.btn-outline-info(href="/users/updateprofile/"+ user.id) Update Profile

@@ -1,0 +1,18 @@
+extends ../layout/common
+
+block content
+  table.table.table-bordered
+    thead.thead-dark
+      tr
+        th Avatar
+        th Name
+        th Phone
+        th View
+    
+    each user in users
+      tr
+        td= user.avatar
+        td= user.name
+        td= user.phone
+        td
+          a.btn.btn-primary(href="/users/" + user._id) View 

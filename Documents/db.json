@@ -1,0 +1,23 @@
+{
+	"lam": [
+		{"idlam": "", "idsv": "12312", "iddethi": "4343", "list id cau hoi": [{"idques": "idchoice"}], "Ngay lam": "23/123"}
+	],
+	"users": [
+		{"id": "", "password": "hash(21321)", "email:": "rqwrq", "Ngay sinh": "342/4234/23/", "hoten": ""}
+	],
+	"classroom": [
+		{"id": "", "tenlop": "", "listiduser": [{}],"ngaybatdau": "", "idgv": "la 1 user"}
+	],
+	"dethi": [
+		{"id": "", "idclassroom": "", "idquestion": [{}, {}], "description": "", "thoigianbatdau": "", "thoigianketthuc": "", "thoigianthi": ""},
+	],
+	"question": [
+		{"id": "", "noi dung": "", "listchoice": [{"idluachon": ""}], "iddapan":"", "diem": ""},
+	],
+	"choice": [
+		{"id": "", "description":""}
+	],
+	"thaoluandethi": [
+		{"id":"", "idUsers":"", "noidung": "", "idDethi": ""}
+	]
+}

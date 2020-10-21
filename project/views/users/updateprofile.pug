@@ -1,0 +1,20 @@
+extends ../layout/common
+
+block content
+  h1 Update Profile
+  form(action='/users/updateprofile/' + user._id, method='POST', enctype="multipart/form-data")
+    .form-group
+      label(for="name") Username: 
+      input.form-control#name(type="text", value=user.name, name="name")
+    .form-group
+      label(for="email") Email: 
+      input.form-control#email(type="text", value=user.email, name="email")
+    .form-group
+      label(for="phone") Phone number: 
+      input.form-control#phone(type="phone", value=user.phone, name="phone")
+    .form-group
+      label(for="avatar") Avatar:
+      br
+      input#avatar(type="file", name="avatar")
+    button.btn.btn-info Confirm
+    
