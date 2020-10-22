@@ -6,6 +6,7 @@ const userRoutes = require('./routes/users.routes');
 const authRoutes = require('./routes/auth.routes');
 const logoutRoutes = require('./routes/logout.routes');
 const signupRoutes = require('./routes/signup.routes');
+const classRoutes = require('./routes/class.routes');
 const authMiddleware = require('./middleware/login.middleware');
 
 app.use(express.static('public'));
@@ -40,4 +41,6 @@ app.use('/login', authRoutes);
 app.use('/signup', signupRoutes);
 
 app.use('/logout', logoutRoutes);
+
+app.use('/class', authMiddleware.authRequire, classRoutes);
 

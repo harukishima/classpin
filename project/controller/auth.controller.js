@@ -1,4 +1,5 @@
 const User = require("../models/users.model");
+const bcrypt = require('bcrypt');
 
 module.exports.login = (req, res) => {
   res.render('auth/login', {});
@@ -16,7 +17,10 @@ module.exports.postlogin = async (req, res) => {
     });
     return;
   }
-  if(user.password !== password) {
+
+  const isvalid =  await bcrypt.compare(password, user.password);
+
+  if(!isvalid) {
     res.render('auth/login', {
       errors : [
         'Wrong password'
