@@ -4,8 +4,11 @@ const port = 3000;
 var cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/users.routes');
 const authRoutes = require('./routes/auth.routes');
+const logoutRoutes = require('./routes/logout.routes');
 const signupRoutes = require('./routes/signup.routes');
 const authMiddleware = require('./middleware/login.middleware');
+
+app.use(express.static('public'));
 
 var multer  = require('multer');
 var upload = multer({ dest: 'uploads/' });
@@ -35,4 +38,6 @@ app.use('/users', authMiddleware.authRequire, userRoutes);
 app.use('/login', authRoutes);
 
 app.use('/signup', signupRoutes);
+
+app.use('/logout', logoutRoutes);
 

@@ -2,7 +2,7 @@ html
   head
     link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
   body
-    nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    nav.navbar.navbar-expand-lg.navbar-light.bg-secondary.text-white
       a.navbar-brand(href='/') ClassPin
       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNavAltMarkup', aria-controls='navbarNavAltMarkup', aria-expanded='false', aria-label='Toggle navigation')
         span.navbar-toggler-icon
@@ -14,7 +14,8 @@ html
           a.nav-link(href='#') Classroom
           if(user)
             a.nav-link(href="/users/" + user._id) Profile
-      p.text-right= "hello, " + user.name
+      span.text-right.mr-3= "hello, " + user.name
+      a.btn.btn-danger(href="/logout") Logout
     .container.mt-5
       block content
     script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin='anonymous')

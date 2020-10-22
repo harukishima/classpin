@@ -1,10 +1,14 @@
 extends ../layout/common
 
 block content
-  h1 Profile
-  ul
-    li= user.name
-    li= user.phone
-    li= user.email
-  
-  a.btn.btn-outline-info(href="/users/updateprofile/"+ user.id) Update Profile
+  h1.ml-5.mb-5 Profile
+  .d-flex
+    .item
+      img(src=user.avatar ? user.avatar : "/images/unnamed.png", alt="avatar", style="width: 200px; height: 200px; border-radius: 100px;")
+    .item.pt-5.pl-3
+      ul
+        li= user.name
+        li= user.phone
+        li= user.email
+    
+      a.ml-4.btn.btn-outline-info(href="/users/updateprofile/"+ user.id) Update Profile

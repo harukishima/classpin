@@ -9,6 +9,7 @@ const schema = new Schema({
   password: String,
   email: String,
   phone: String,
+  avatar: String
 });
 
 

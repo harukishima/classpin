@@ -31,6 +31,7 @@ module.exports.postUpdateProfile = async (req, res) => {
   user.name = name;
   user.phone = phone;
   user.email = email;
+  user.avatar = '/' + req.file.path.split("\\").slice(1).join('/');  
   await user.save();
   res.redirect('/users/' + user._id);
 }
