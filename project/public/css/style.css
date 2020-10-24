@@ -52,7 +52,16 @@
   transform: translate(-50%, -50%);
 }
 
+
 .contain .sub-btn {
   margin-top: 30px;
   text-align: center;
+}
+
+footer{
+  background-color: rgb(20, 13, 13);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: #fff;
+  display: block;
 }

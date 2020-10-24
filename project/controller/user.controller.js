@@ -36,9 +36,3 @@ module.exports.postUpdateProfile = async (req, res) => {
   await user.save();
   res.redirect('/users/' + user._id);
 }
-
-module.exports.create = (req, res) => {
-  res.render('class/create', {
-
-  });
-}

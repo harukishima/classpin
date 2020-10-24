@@ -8,6 +8,7 @@ const Classschema = new Schema({
   listusers: Array,
   teacher: mongoose.ObjectId,
   datebegin: Date,
+  description: String,
 });
 
 

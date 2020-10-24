@@ -40,7 +40,7 @@ app.use('/login', authRoutes);
 
 app.use('/signup', signupRoutes);
 
-app.use('/logout', logoutRoutes);
+app.use('/logout', authMiddleware.authRequire, logoutRoutes);
 
 app.use('/class', authMiddleware.authRequire, classRoutes);
 
