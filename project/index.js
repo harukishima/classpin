@@ -19,7 +19,7 @@ app.set('views', './views');
 
 
 const mongoose = require('mongoose');   
-mongoose.connect('mongodb://localhost/ClassPin');
+mongoose.connect('mongodb://localhost/ClassPin' ,{ useNewUrlParser: true });
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json()) // for parsing application/json

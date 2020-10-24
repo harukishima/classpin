@@ -2,6 +2,7 @@ const User = require('../models/users.model');
 
 module.exports.index = (req, res) => {
   User.find({}).then(function(users) {
+      console.log(users);
       res.render('users/index', {
           users: users
       });
@@ -13,7 +14,7 @@ module.exports.profile =  (req, res) => {
       res.render('users/profile', {
           user: user
       });
-  }) ;
+  });
 }
 
 module.exports.updateProfile = (req, res) => {
@@ -34,4 +35,10 @@ module.exports.postUpdateProfile = async (req, res) => {
   user.avatar = '/' + req.file.path.split("\\").slice(1).join('/');  
   await user.save();
   res.redirect('/users/' + user._id);
+}
+
+module.exports.create = (req, res) => {
+  res.render('class/create', {
+
+  });
 }
