@@ -7,13 +7,7 @@ module.exports.index = (req, res) => {
 };
 
 module.exports.postSignup = async (req, res) => {
-  var namelogin = req.body.namelogin;
-  var fullname = req.body.fullname;
-  var password = req.body.password1;
-  var phone = req.body.phone;
-  var retypePassword = req.body.password2;
-  var email = req.body.email;
-  const userExisted = await User.findOne({namelogin: namelogin});
+  const userExisted = await User.findOne({namelogin: req.body.namelogin});
   if(userExisted) {
     res.render('auth/register', {
       errors: "Username already exists"
@@ -21,21 +15,21 @@ module.exports.postSignup = async (req, res) => {
     return;
   }
 
-  if(password !== retypePassword) {
+  if(req.body.password1 !== req.body.password2) {
     res.render('auth/register', {
       errors: "Password did'nt match"
     });
     return;
   }
 
-  const hashPassword = await bcrypt.hash(password, 10)
+  const hashPassword = await bcrypt.hash(req.body.password1, 10)
   const newUser = new User({
     _id: mongoose.Types.ObjectId(),
-    namelogin: namelogin,
-    name: fullname,
+    namelogin: req.body.namelogin,
+    name: req.body.fullname,
     password: hashPassword,
-    email: email,
-    phone: phone,
+    email: req.body.email,
+    phone: req.body.phone,
   });
 
   newUser.save(function(err) {
