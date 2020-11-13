@@ -1,3 +1,10 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
 .btn-e:link, .btn-e:visited {
   text-transform: uppercase;
   text-decoration: none;
@@ -60,8 +67,15 @@
 
 footer{
   background-color: rgb(20, 13, 13);
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px;
   color: #fff;
+  text-align: center;
   display: block;
+  margin-bottom: 0;
 }
+
+.heading--primary__main{
+  height: 70vh;
+  text-align: center;
+}
+
