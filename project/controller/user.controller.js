@@ -12,7 +12,7 @@ module.exports.index = (req, res) => {
 module.exports.profile =  (req, res) => {
   User.findById({_id: req.params.id}).then(function(user) {
       res.render('users/profile', {
-          user: user
+          matchedUser: user
       });
   });
 }

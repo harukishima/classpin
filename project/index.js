@@ -1,6 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
-const port = 3000;
+const key = require('./config/main');
+const {port, mongo_URL, SECRET_SESSION} = key;
+const ConnectMongoDB = require('./connect');
 var cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/users.routes');
 const authRoutes = require('./routes/auth.routes');
@@ -19,12 +22,13 @@ app.set('views', './views');
 
 
 const mongoose = require('mongoose');   
-mongoose.connect('mongodb://localhost/ClassPin' ,{ useNewUrlParser: true });
+// mongoose.connect('mongodb://localhost/ClassPin' ,{ useNewUrlParser: true }, { useUnifiedTopology: true });
+ConnectMongoDB(mongo_URL);
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-app.use(cookieParser('132321321e123dasd'));
+app.use(cookieParser(SECRET_SESSION));
 
 app.listen(port, function() {
     console.log("Listening on port " + port);
