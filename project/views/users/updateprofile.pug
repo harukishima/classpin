@@ -9,7 +9,7 @@ block content
       .row
         .enroll
           .enroll__form
-            form.form(action='/users/updateprofile/' + user._id, method='POST', enctype="multipart/form-data")
+            form.form(name='updateProfileForm', onsubmit="validateForm(event)" ,action='/users/updateprofile/' + user._id, method='POST', enctype="multipart/form-data")
               div
                 h2.heading-secondary
                   | Update Profile
@@ -33,5 +33,25 @@ block content
                 button#custom-btn.btn.btn-primary
                   | Comfirm &rarr;
 
-            if(msg)
-              p.mt-3.text-danger= msg
+            if(passedVariable)
+              p.mt-3.text-danger= passedVariable
+block js
+  script(type="text/javascript").
+    function validateForm(event) {
+      event.preventDefault();
+
+      // validate tai day
+      Swal.fire({
+        title: 'Do you want to save the changes?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: `Save`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          document.updateProfileForm.submit();
+        } else if (result.isDenied) {
+          Swal.fire('Changes are not saved', '', 'info')
+        }
+      }) 
+    }

@@ -16,3 +16,17 @@ block content
             li= matchedUser.email
         
           a.ml-4.btn.btn-outline-info(href="/users/updateprofile/"+ matchedUser.id) Update Profile
+      if(passedVariable)
+        p#msg(style="visibility: hidden;") #{passedVariable}
+
+block js
+  script.
+    const msg = document.getElementById('msg');
+    if(msg.textContent === 'success') {
+    Swal.fire('Saved!', '', 'success');
+    } else {
+      Swal.fire('Changes are not saved', '', 'info');
+    }
+    
+    
+    

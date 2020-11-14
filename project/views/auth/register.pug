@@ -87,12 +87,12 @@ head
             .input-group-append
               span.input-group-text
                 i.fas.fa-key
-            input(type='password', name='password1' required)
+            input(type='password', name='password1', minlength="8", maxlength="30", required)
           .input-group.mb-2
             .input-group-append
               span.input-group-text
                 i.fas.fa-key
-            input(type='password', name='password2' required)
+            input(type='password', name='password2', minlength="8", maxlength="30", required)
           if (errors)
             each error in errors
               span.text-danger= error
