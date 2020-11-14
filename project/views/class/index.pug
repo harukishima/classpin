@@ -1,25 +1,27 @@
 extends ../layout/common
 
 block content
-  h1 Your class
-  .btn-group.ml-5
-    button.btn.btn-info.dropdown-toggle.dropdown-toggle-split(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
-      i.fas.fa-plus
-      span.sr-only Toggle Dropdown     
-    .dropdown-menu
-      a.dropdown-item(href='/class/create') Create a class
-      a.dropdown-item(href='/class/enroll') Enroll a class
-  form.mt-3.ml-5.d-inline-block(action="/class/search", method="GET")
-    input(type="text", name="q", size="23", value= value? value: "")
-    button.ml-2.btn.btn-info Search
-  hr
-  .d-flex.justify-content-start.flex-wrap
-    each a in allClass
-      .card.bg-light.mb-5.ml-5(style='max-width: 18rem;')
-        .card-header
-          a.font-weight-bold(href="/class/" + a._id)= a.classname
-          h5.card-title= a.teacher_info[0].name
-        .card-body
-          p.card-text
-            | Some quick example text to build on the card title and make up the bulk of the card&apos;s content.
+  .block(style="height: 75vh; margin-top: 7rem")
+    .container.mt-3
+      h1 Your class
+      .btn-group.ml-5
+        button.btn.btn-info.dropdown-toggle.dropdown-toggle-split(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+          i.fas.fa-plus
+          span.sr-only Toggle Dropdown     
+        .dropdown-menu
+          a.dropdown-item(href='/class/create') Create a class
+          a.dropdown-item(href='/class/enroll') Enroll a class
+      form.mt-3.ml-5.d-inline-block(action="/class/search", method="GET")
+        input(type="text", name="q", size="23", value= value? value: "")
+        button.ml-2.btn.btn-info Search
+      hr
+      .d-flex.justify-content-start.flex-wrap
+        each a in allClass
+          .card.bg-light.mb-5.ml-5(style='width: 18rem;')
+            .card-header
+              a.font-weight-bold(href="/class/" + a._id)= a.classname
+              h5.card-title= a.teacher_info[0].name
+            .card-body
+              p.card-text
+                span= a.description
    

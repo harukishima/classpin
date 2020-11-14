@@ -1,0 +1,108 @@
+/* $color-primary: #5a73fc;
+$color-primary-light:#8e9efc;
+$color-primary-dark: #1c3eff;
+$color-grey: #777777;
+$color-white: #fff;
+$color-black: #000;
+$color-grey-light-1: #f7f7f7;
+$default-font-size: 1.6rem;
+$color-secondary-light: #ffb900; //Màu Cam
+$color-secondary-dark: #ff7730;
+$color-tertiary-light:#55c57a; // Màu xanh lá cây
+$color-tertiary-dark:#28b485; */
+
+*{
+  margin: 0 auto;
+  padding: 0 auto;
+  box-sizing: border-box;
+}
+
+body {
+  box-sizing: border-box; }
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #777777; }
+
+#custom-btn{
+  border-radius: 25px;
+  padding: 12px 25px;
+}
+
+.heading-secondary {
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: inline-block;
+  letter-spacing: 1rem;
+  cursor: pointer;
+  background-image: linear-gradient(to right, #8e9efc, #1c3eff);
+  color: transparent;
+  margin-bottom: 2rem;
+  -webkit-background-clip: text;
+  transition: all .2s; }
+  .heading-secondary:hover {
+    transform: skewY(5deg) scale(1.1);
+    text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }
+
+.section-enroll{
+    padding: 10rem 0;
+    background-image: linear-gradient(to right bottom, #8e9efc, #1c3eff);
+}
+
+.enroll {
+  display: inline-block;
+  background-image: radial-gradient(150% 200% ellipse at -15%, rgba(255, 255, 255, 0.8) 50%, transparent 50%), url("/images/background3.jpg");
+  background-size: cover;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
+  border-radius: 5rem;
+  text-align: center;
+  max-height: 50rem; }
+  .enroll__form {
+    padding: 6rem; }
+
+.form__group:not(:last-child) {
+  margin-bottom: 2rem; }
+
+.form__input {
+  margin: auto ;
+  font-size: 1.5rem;
+  font-family: inherit;
+  padding: 0.5rem 2rem;
+  color: inherit;
+  border: none;
+  border-radius: .2rem;
+  border-bottom: 3px solid transparent;
+  display: block;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 80%;
+  transition: all .3s; }
+.form__input:focus {
+  outline: none;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+  border-bottom: 3px solid #5a73fc; }
+  .form__input:focus:invalid {
+    border-bottom: 3px solid #ff7730; }
+.form__input::-webkit-input-placeholder {
+  color: #777777; }
+
+.form__label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-left: 2rem;
+  margin-top: .7rem;
+  display: block;
+  transition: all .3s; }
+
+.form__input:placeholder-shown + .form__label {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4rem); }
+
+
+
+
+

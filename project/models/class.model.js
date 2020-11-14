@@ -7,6 +7,8 @@ const Classschema = new Schema({
   classname: String,
   listusers: Array,
   teacher: mongoose.ObjectId,
+  subject: String,
+  joinId: String,
   datebegin: Date,
   description: String,
 });

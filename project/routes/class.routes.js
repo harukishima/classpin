@@ -9,5 +9,6 @@ router.get('/enroll', controller.enroll);
 router.post('/create', controller.postCreate);
 router.get('/search', controller.search);
 router.get('/:id', controller.classControl);
+router.post('/enroll', controller.postEnrollClass);
 
 module.exports = router;

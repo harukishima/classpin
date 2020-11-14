@@ -1,0 +1,15 @@
+nav.navbar.navbar-expand-lg.navbar-light.bg-light.text-white(style="z-index: 10; position: fixed; width: 100%; top: 0; left: 0; height: 10vh;")
+      a.navbar-brand(href='/') ClassPin
+      button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNavAltMarkup', aria-controls='navbarNavAltMarkup', aria-expanded='false', aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+      #navbarNavAltMarkup.collapse.navbar-collapse
+        .navbar-nav.ml-0
+          a.nav-link.active(href='/')
+            | Dashboard
+            span.sr-only (current)
+          a.nav-link(href='/class') Classroom
+          a.nav-link(href='/users') Users
+          if(user)
+            a.nav-link(href="/users/" + user._id) Profile
+      span.text-right.mr-3(style="color: #000")= "hello, " + user.name
+      a.btn.btn-danger(href="/logout") Logout

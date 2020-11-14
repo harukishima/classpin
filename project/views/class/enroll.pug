@@ -1,4 +1,31 @@
 extends ../layout/common 
 
+block head
+  link(rel="stylesheet", href="/css/enroll.css")
+
 block content
-  h1 Form tham gia 
+  //- .enroll1-form.d-flex.justify-content-center.align-items-center
+  //-   h1 Enroll a class
+  //-   form(action="/class/enroll", method="POST")
+  //-     label(for="id_class") Enroll a class
+  //-     input#id_class(type="text", name="id_class", placeholder="Input a class-ID", value= value? value: "")
+  //-     button.btn.btn-primary Join
+    
+
+  section.section-enroll
+    .row
+      .enroll
+        .enroll__form
+          form.form(action="/class/enroll", method="POST")
+            div
+              h2.heading-secondary
+                | Enroll in a class
+            .form__group
+              //label.form__label(for='id_class') Class ID
+              input#id_class.form__input(type='text', name="id_class" placeholder='Input a class ID',value= value? value: "", required='')
+            .form__group
+              button#custom-btn.btn.btn-primary
+                | Join &rarr;
+
+          if(msg)
+            p.mt-3.text-danger= msg

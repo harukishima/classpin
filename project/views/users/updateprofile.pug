@@ -1,20 +1,37 @@
 extends ../layout/common
 
+block head
+  link(rel="stylesheet", href="/css/enroll.css")
+
 block content
-  h1 Update Profile
-  form(action='/users/updateprofile/' + user._id, method='POST', enctype="multipart/form-data")
-    .form-group
-      label(for="name") Username: 
-      input.form-control#name(type="text", value=user.name, name="name")
-    .form-group
-      label(for="email") Email: 
-      input.form-control#email(type="text", value=user.email, name="email")
-    .form-group
-      label(for="phone") Phone number: 
-      input.form-control#phone(type="phone", value=user.phone, name="phone")
-    .form-group
-      label(for="avatar") Avatar:
-      br
-      input#avatar(type="file", name="avatar")
-    button.btn.btn-info Confirm
-    
+
+  section.section-enroll
+      .row
+        .enroll
+          .enroll__form
+            form.form(action='/users/updateprofile/' + user._id, method='POST', enctype="multipart/form-data")
+              div
+                h2.heading-secondary
+                  | Update Profile
+              .form__group
+                label.form__label(for='name') Full name
+                input#name.form__input(type='text', placeholder='full name', value=user.name, name="name", required='')
+                
+              .form__group
+                label.form__label(for='email') Email  
+                input#email.form__input(type='email', value=user.email, name="email", placeholder='email', required='')
+                            
+              .form__group
+                label.form__label(for='phone') Phone
+                input#phone.form__input(type="phone", value=user.phone, name="phone", placeholder='phone', required='')
+
+              .form__group
+                label.form__label(for='avatar') Avatar
+                input#avatar(type="file", name="avatar")
+                              
+              .form__group
+                button#custom-btn.btn.btn-primary
+                  | Comfirm &rarr;
+
+            if(msg)
+              p.mt-3.text-danger= msg

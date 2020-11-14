@@ -1,27 +1,15 @@
 html
   head
+    block head
+    link(rel="stylesheet", href="/css/footer.css")
     link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
     link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous')
-    link(rel="stylesheet", href="./css/style.css")
-    block head
+    title CLASSPIN |
   body
-    nav.navbar.navbar-expand-lg.navbar-light.bg-secondary.text-white
-      a.navbar-brand(href='/') ClassPin
-      button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNavAltMarkup', aria-controls='navbarNavAltMarkup', aria-expanded='false', aria-label='Toggle navigation')
-        span.navbar-toggler-icon
-      #navbarNavAltMarkup.collapse.navbar-collapse
-        .navbar-nav
-          a.nav-link.active(href='/')
-            | Dashboard
-            span.sr-only (current)
-          a.nav-link(href='/class') Classroom
-          if(user)
-            a.nav-link(href="/users/" + user._id) Profile
-      span.text-right.mr-3= "hello, " + user.name
-      a.btn.btn-danger(href="/logout") Logout
-    .container.mt-5
-      block content
-    footer.bg-secondary
+    .navigation(style="display: block; padding-top: -50x;")
+      include ./nav.pug
+    block content
+    footer.bg-light
       <p>Copyright &copy; 2020 by Sugar-DEV</p>
     script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin='anonymous')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', integrity='sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1', crossorigin='anonymous')

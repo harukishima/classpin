@@ -1,21 +1,23 @@
 extends ../layout/common
 
 block content
-  h1 User list
-  hr
-  table.mt-5.table.table-bordered.text-center
-    thead.thead-dark
-      tr
-        th Avatar
-        th Name
-        th Phone
-        th View
-    
-    each user in users
-      tr
-        td
-          img(src=user.avatar ? user.avatar : "/images/unnamed.png", alt="user-avatar", style="width: 80px; height: 80px; border-radius: 50px")
-        td= user.name
-        td= user.phone
-        td
-          a.btn.btn-primary(href="/users/" + user._id) View 
+  .block(style="margin-top: 7rem")
+    .container.mt-3
+      h1 User list
+      hr
+      table.mt-5.table.table-bordered.text-center
+        thead.thead-dark
+          tr
+            th Avatar
+            th Name
+            th Phone
+            th View
+        
+        each user in users
+          tr
+            td
+              img(src=user.avatar ? user.avatar : "/images/unnamed.png", alt="user-avatar", style="width: 80px; height: 80px; border-radius: 50px")
+            td= user.name
+            td= user.phone
+            td
+              a.btn.btn-primary(href="/users/" + user._id) View 

@@ -1,17 +1,19 @@
 extends ../layout/common 
 
 block content
-  h1 Create your class
-  .d-flex.justify-content-center
-    form(action='/class/create', method="POST")
-      .form-group
-        label(for='className') Classname
-        input.form-control#className(type='text', name="classname")
-      .form-group
-        label(for='subject') Subject
-        input.form-control#subject(type='text', name="subject")
-      .form-group
-        label(for='description') Description 
-        br
-        textarea(id="description", name="description", cols="150", rows="5")
-      input.btn.btn-primary(type="submit", value="Create")
+  .block(style="height: 75vh; margin-top: 7rem")
+    .container.mt-3
+      h1 Create your class
+      .d-flex.justify-content-center
+        form(action='/class/create', method="POST")
+          .form-group
+            label(for='className') Classname
+            input.form-control#className(type='text', name="classname")
+          .form-group
+            label(for='subject') Subject
+            input.form-control#subject(type='text', name="subject")
+          .form-group
+            label(for='description') Description 
+            br
+            textarea(id="description", name="description", cols="150", rows="5")
+          input.btn.btn-primary(type="submit", value="Create")

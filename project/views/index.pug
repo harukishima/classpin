@@ -1,15 +1,18 @@
 extends ./layout/common
 
-block content
-  //- .contain
-  //-   .heading-primary
-  //-     h1 Welcome to ClassPin!
-  //-   .sub-btn
-  //-     a.btn.btn-e.btn--blue(href="/class") Go to your class
+block head
+  link(rel="stylesheet", href="/css/style.css")
 
-  .d-flex.justify-content-center.align-items-center.heading--primary__main
-    .heading
-      h1 Welcome to ClassPin!
-      a.btn.btn-e.btn--blue(href="/class") Go to your class
+block content
+  .block(style="height: 75vh; margin-top: 2rem")
+    header
+      .text-box
+        h3.heading-primary
+          span.heading-primary__main
+            | ClassPin!
+          span.heading-primary__sub
+            | Class of the future!
+        a.btn.btn--white.btn--animated(href="/class") Go to your class
+    
 
     
