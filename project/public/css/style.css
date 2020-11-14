@@ -38,7 +38,7 @@ header{
   background-size: cover;
   background-position: top;
   position: relative;
-  height: 120vh;
+  height: 140vh;
   clip-path: polygon(0 0, 100% 0, 100% 43%, 31% 100%, 0 70%);
 }
 
@@ -67,7 +67,7 @@ header{
     animation-name: moveInLeft;
     animation-duration: 2s;
     animation-delay: 3s;
-    animation-iteration-count: infinite;
+    animation-iteration-count: 2;
 }
 
 .heading-primary__main{
@@ -87,7 +87,7 @@ header{
 }
 
 
-.btn:link, .btn:visited {
+.button:link, .button:visited {
   text-transform: uppercase;
   text-decoration: none;
   padding: 15px 40px;
@@ -96,30 +96,30 @@ header{
   font-size: 16px;
   position: relative; }
 
-.btn--white {
+.button--white {
   color: #777777;
   background-color: #fff; }
-  .btn--white::after {
+  .button--white::after {
     background-color: #fff; }
 
-.btn--blue {
+.button--blue {
   color: #fff;
   background-color: #5a73fc; }
-  .btn--blue::after {
+  .button--blue::after {
     background-color: #5a73fc; }
 
-.btn:hover {
+.button:hover {
   transform: translateY(-3px);
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); }
-  .btn:hover::after {
+  .button:hover::after {
     transform: scaleX(1.4) scaleY(1.6);
     opacity: 0; }
 
-.btn:active {
+.button:active {
   transform: translateY(-1px);
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.8); }
 
-.btn::after {
+.button::after {
   content: "";
   display: block;
   height: 100%;
@@ -131,10 +131,10 @@ header{
   z-index: -1;
   transition: all 0.4s; }
 
-.btn--animated {
+.button--animated {
   animation: moveInBottom .5s ease-out .75s; }
 
-.btn-text:link, .btn-text:visited {
+.button-text:link, .button-text:visited {
   color: #5a73fc;
   text-decoration: none;
   display: inline-block;
@@ -143,13 +143,54 @@ header{
   font-size: 1.6rem;
   transition: all .2s; }
 
-.btn-text:hover {
+.button-text:hover {
   color: #fff;
   background-color: #5a73fc;
   transform: translateY(-0.2rem);
   box-shadow: 0rem 1rem 2rem rgba(0, 0, 0, 0.15); }
 
-.btn-text:active {
+.button-text:active {
   transform: translateY(0);
   box-shadow: 0rem 0.5rem 1rem rgba(0, 0, 0, 0.15); }
 
+.custom-card{
+  box-shadow: 0 4px 30px rgba(11,33,74,.11), 0 -2px 5px rgba(11,33,74,.03);
+  background-color: #fff;
+  padding: 2em;
+  color: #90a0ac;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -.25px;
+  height: 30rem;
+  width: 33rem;
+  position: absolute;
+  top: 35%;
+  right: 10%;
+}
+
+.card-img{
+  height: 15rem;
+  width: 29rem;
+  margin-bottom: 1.5rem;
+}
+
+#img_header{
+  width: auto;
+  height: auto;
+  height: 100%;
+  width: 100%;
+}
+
+#card_heading{
+  color: #000;
+}
+
+.description{
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.cta-links{
+  margin-bottom: 2rem;
+}

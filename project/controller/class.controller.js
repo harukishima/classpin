@@ -46,7 +46,7 @@ module.exports.postCreate = async (req, res) => {
   newClass.subject = req.body.subject;
   console.log(newClass);
   await newClass.save();
-  res.redirect('/class');
+  res.redirect('/class/' + newClass._id);
 };  
 
 module.exports.classControl = async (req, res) => {

@@ -10,6 +10,7 @@ const authRoutes = require('./routes/auth.routes');
 const logoutRoutes = require('./routes/logout.routes');
 const signupRoutes = require('./routes/signup.routes');
 const classRoutes = require('./routes/class.routes');
+const guideRoutes = require('./routes/guide.routes');
 const authMiddleware = require('./middleware/login.middleware');
 
 app.use(express.static('public'));
@@ -48,3 +49,4 @@ app.use('/logout', authMiddleware.authRequire, logoutRoutes);
 
 app.use('/class', authMiddleware.authRequire, classRoutes);
 
+app.use('/guide', authMiddleware.authRequire, guideRoutes);

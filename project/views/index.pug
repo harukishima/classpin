@@ -4,7 +4,7 @@ block head
   link(rel="stylesheet", href="/css/style.css")
 
 block content
-  .block(style="height: 75vh; margin-top: 2rem")
+  .block(style="height: 150vh; margin-top: 2rem")
     header
       .text-box
         h3.heading-primary
@@ -12,7 +12,16 @@ block content
             | ClassPin!
           span.heading-primary__sub
             | Class of the future!
-        a.btn.btn--white.btn--animated(href="/class") Go to your class
+        a.button.button--white.button--animated(href="/class") Go to your class
+    .custom-card
+      .card-img
+        img#img_header(src="/images/humangroups2.jpg", alt="card-img")
+      .card-text
+        h4#card_heading Welcome to ClassPin
+        .description We help students and teachers have a powerful tool for learning
+        .cta-links
+          .link
+            a.button-text(href="/guide") Read the guide &rarr;
     
 
     

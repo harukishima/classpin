@@ -1,19 +1,31 @@
 extends ../layout/common 
 
+block head
+  link(rel="stylesheet", href="/css/enroll.css")
+
 block content
-  .block(style="height: 75vh; margin-top: 7rem")
-    .container.mt-3
-      h1 Create your class
-      .d-flex.justify-content-center
-        form(action='/class/create', method="POST")
-          .form-group
-            label(for='className') Classname
-            input.form-control#className(type='text', name="classname")
-          .form-group
-            label(for='subject') Subject
-            input.form-control#subject(type='text', name="subject")
-          .form-group
-            label(for='description') Description 
-            br
-            textarea(id="description", name="description", cols="150", rows="5")
-          input.btn.btn-primary(type="submit", value="Create")
+  section.section-enroll
+      .row
+        .enroll
+          .enroll__form
+            form.form(action='/class/create', method="POST")
+              div
+                h2.heading-secondary
+                  | Create your class
+              .form__group
+                label.form__label(for='className') Classname
+                input#className.form__input(type='text', name="classname", placeholder='class name', required='')
+                
+              .form__group
+                label.form__label(for='subject') Subject
+                input#subject.form__input(type='text', name="subject", placeholder='subject', required='')
+                            
+              .form__group
+                label.form__label(for='description') Description 
+                textarea.form__input(id="description", name="description", cols="60", rows="5")
+
+              .form__group
+                button#custom-btn.btn.btn-primary
+                  | Create &rarr;
+            if(msg)
+              p.mt-3.text-danger= msg
