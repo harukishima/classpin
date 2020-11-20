@@ -2,7 +2,6 @@ const User = require('../models/users.model');
 
 module.exports.index = (req, res) => {
   User.find({}).then(function(users) {
-      console.log(users);
       res.render('users/index', {
           users: users
       });

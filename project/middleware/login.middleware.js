@@ -11,5 +11,6 @@ module.exports.authRequire = async (req, res, next)=> {
     return;
   }
   res.locals.user = user;
+  req.session.userId = user._id.toString();
   next();
 }
