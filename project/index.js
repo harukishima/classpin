@@ -1,9 +1,11 @@
 require('dotenv').config();
+require('express-async-errors');
+var session = require('express-session');
 const express = require('express');
+const roles = require('./roles');
 const app = express();
 const key = require('./config/main');
 const {port, mongo_URL, SECRET_SESSION} = key;
-const ConnectMongoDB = require('./connect');
 var cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/users.routes');
 const authRoutes = require('./routes/auth.routes');
@@ -13,40 +15,72 @@ const classRoutes = require('./routes/class.routes');
 const guideRoutes = require('./routes/guide.routes');
 const authMiddleware = require('./middleware/login.middleware');
 
+
 app.use(express.static('public'));
-
-var multer  = require('multer');
-var upload = multer({ dest: 'uploads/' });
-
 app.set('view engine', 'pug');
 app.set('views', './views');
-
-
-const mongoose = require('mongoose');   
-// mongoose.connect('mongodb://localhost/ClassPin' ,{ useNewUrlParser: true }, { useUnifiedTopology: true });
-ConnectMongoDB(mongo_URL);
-
 const bodyParser = require('body-parser');
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(cookieParser(SECRET_SESSION));
 
-app.listen(port, function() {
-    console.log("Listening on port " + port);
-});
+app.use(session({
+    secret: 'secret-key',
+    resave: false,
+    saveUninitialized: false,
+}));
 
-app.get('/', authMiddleware.authRequire, (req, res) => {
+// Connect to mongodb use callback function
+roles.connectMongodb(mongo_URL, initRoutes);
+
+function initRoutes(acl) {
+  app.get('/info', authMiddleware.authRequire, (req, res) => {
+    acl.allowedPermissions(req.session.userId, ['/class', '/guide', '/users'], (err, permission) => {
+        res.json(permission);
+    });
+  });
+  
+  app.get('/role', authMiddleware.authRequire, (req, res) => {
+    acl.userRoles(req.session.userId, (err, roles) => {
+        res.json(roles);
+    })
+  });
+  
+  app.get('/', authMiddleware.authRequire, (req, res) => {
     res.render('index');
+  });
+  
+  app.get('/about', (req, res) => {
+    throw new Error('ABOUT BROKEN');
+  })
+  
+  app.use('/users', authMiddleware.authRequire, acl.middleware(1), userRoutes);
+  
+  app.use('/login', authRoutes);
+  
+  app.use('/signup', signupRoutes);
+  
+  app.use('/logout', authMiddleware.authRequire, logoutRoutes);
+  
+  app.use('/class', authMiddleware.authRequire, acl.middleware(1), classRoutes);
+  
+  app.use('/guide', authMiddleware.authRequire, guideRoutes);
+
+  app.use(function(req, res) {
+    res.render('404');
+  })
+
+  // default error handler
+  app.use(function (err, req, res, next) {
+    console.error(err.stack)
+    res.render('500');
+  })
+}
+
+app.listen(port, function() {
+  console.log("Listening on port " + port);
 });
 
-app.use('/users', authMiddleware.authRequire, userRoutes);
 
-app.use('/login', authRoutes);
 
-app.use('/signup', signupRoutes);
 
-app.use('/logout', authMiddleware.authRequire, logoutRoutes);
-
-app.use('/class', authMiddleware.authRequire, classRoutes);
-
-app.use('/guide', authMiddleware.authRequire, guideRoutes);

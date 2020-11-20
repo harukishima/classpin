@@ -33,7 +33,6 @@ module.exports.enroll = (req, res) => {
 
 module.exports.postCreate = async (req, res) => {
   const user = await User.findById({_id: req.signedCookies.userId});
-  console.log(req.body);
   const newClass= new Classroom();
   newClass._id = mongoose.Types.ObjectId();
   newClass.classname = req.body.classname;
@@ -44,22 +43,18 @@ module.exports.postCreate = async (req, res) => {
   newClass.teacher = user._id;
   newClass.description = req.body.description;
   newClass.subject = req.body.subject;
-  console.log(newClass);
   await newClass.save();
   res.redirect('/class/' + newClass._id);
 };  
 
 module.exports.classControl = async (req, res) => {
-  console.log(req.params.id);
   const classroom = await Classroom.findById({_id: req.params.id});
-  console.log(classroom);
   res.render('class/classcontrol', {
     classroom: classroom
   });
 };
 
 module.exports.search = async (req, res) => {
-  console.log(req.query);
   var q = req.query.q;
   const allClass = await Classroom.aggregate([
     {
@@ -72,7 +67,6 @@ module.exports.search = async (req, res) => {
         }
     }
   ]);
-  console.log(allClass);
   var matchedClass = allClass.filter(function(x) {
     return x.classname.toLowerCase().indexOf(q.toLowerCase()) !== -1;
   });
@@ -87,7 +81,6 @@ module.exports.postEnrollClass = async (req, res) => {
   try {
 
     // find class with ID
-    console.log(req.body.id_class);
     const matchedClass = await Classroom.findOne({joinId: req.body.id_class});
     if(!matchedClass) {
       res.render('class/enroll', {
@@ -96,7 +89,6 @@ module.exports.postEnrollClass = async (req, res) => {
       });
       return;
     }
-    console.log(matchedClass);
     // find user
     const user = await User.findById({_id: req.signedCookies.userId});
     
