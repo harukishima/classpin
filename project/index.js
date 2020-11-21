@@ -53,6 +53,7 @@ function initRoutes(acl) {
   app.get('/about', (req, res) => {
     throw new Error('ABOUT BROKEN');
   })
+
   
   app.use('/users', authMiddleware.authRequire, acl.middleware(1), userRoutes);
   
@@ -70,7 +71,7 @@ function initRoutes(acl) {
     res.render('404');
   })
 
-  // default error handler
+    // default error handler
   app.use(function (err, req, res, next) {
     console.error(err.stack)
     res.render('500');
