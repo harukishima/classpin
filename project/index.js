@@ -14,6 +14,7 @@ const signupRoutes = require('./routes/signup.routes');
 const classRoutes = require('./routes/class.routes');
 const guideRoutes = require('./routes/guide.routes');
 const authMiddleware = require('./middleware/login.middleware');
+const adminRoutes = require('./routes/admin.routes.js');
 
 
 app.use(express.static('public'));
@@ -54,6 +55,7 @@ function initRoutes(acl) {
     throw new Error('ABOUT BROKEN');
   })
 
+  app.use('/admin', authMiddleware.authRequire, acl.middleware(1),  adminRoutes);
   
   app.use('/users', authMiddleware.authRequire, acl.middleware(1), userRoutes);
   

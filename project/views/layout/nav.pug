@@ -1,4 +1,4 @@
-nav.navbar.navbar-expand-lg.navbar-light.bg-light.text-white(style="z-index: 10; position: fixed; width: 100%; top: 0; left: 0; height: 10vh;")
+nav.navbar.navbar-expand-lg.navbar-light.bg-light.text-secondary(style="z-index: 10; position: fixed; width: 100%; top: 0; left: 0; height: 10vh;")
       a.navbar-brand(href='/') ClassPin
       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNavAltMarkup', aria-controls='navbarNavAltMarkup', aria-expanded='false', aria-label='Toggle navigation')
         span.navbar-toggler-icon
@@ -8,8 +8,30 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light.text-white(style="z-index: 10;
             | Dashboard
             span.sr-only (current)
           a.nav-link(href='/class') Classroom
-          a.nav-link(href='/users') Users
-          if(user)
-            a.nav-link(href="/users/" + user._id) Profile
-      span.text-right.mr-3(style="color: #000")= "hello, " + user.name
-      a.btn.btn-danger(href="/logout") Logout
+        .dropdown.ml-auto
+          a#triggerId.btn.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+            span.mr-2.d-none.d-lg-inline.text-secondary-600.small #{user.name}
+            img.img-profile.rounded-circle(src=user.avatar, style='height: 30px; width: 30px;')
+            a
+              .dropdown-menu(aria-labelledby='triggerId')
+                a.dropdown-item(href="/users/" + user._id)
+                  i.fas.fa-user.fa-sm.fa-fw.mr-2.text-gray-400
+                  |           Profile
+                a.dropdown-item(href='#')
+                  i.fas.fa-cogs.fa-sm.fa-fw.mr-2.text-gray-400
+                  |           Settings
+                a.dropdown-item(href='#')
+                  i.fas.fa-list.fa-sm.fa-fw.mr-2.text-gray-400
+                  |           Activity Log
+                .dropdown-divider
+                .text-center
+                  a.btn.btn-danger(href="/logout")
+                    i.fas.fa-sign-out-alt.fa-sm.fa-fw.mr-2.text-gray-400
+                    |           Logout
+          
+      //-     if(user)
+      //-       a.nav-link(href="/users/" + user._id) Profile
+      //- span.text-right.mr-3(style="color: #000")= "hello, " + user.name
+      //- a.btn.btn-danger(href="/logout") Logout
+
+

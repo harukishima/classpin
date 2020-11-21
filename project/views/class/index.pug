@@ -5,15 +5,18 @@ block content
     .container.mt-3
       h1 Your class
       .btn-group.ml-5
-        button.btn.btn-info.dropdown-toggle.dropdown-toggle-split(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+        button.btn.btn-primary.dropdown-toggle.dropdown-toggle-split(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
           i.fas.fa-plus
           span.sr-only Toggle Dropdown     
         .dropdown-menu
           a.dropdown-item(href='/class/create') Create a class
           a.dropdown-item(href='/class/enroll') Enroll a class
-      form.mt-3.ml-5.d-inline-block(action="/class/search", method="GET")
-        input(type="text", name="q", size="23", value= value? value: "")
-        button.ml-2.btn.btn-info Search
+      form.mt-3.ml-5.d-inline-block(action="/class/search", method="GET", name="myform")
+        .input-group
+          input.form-control.bg-light.border-0.small(type='text', placeholder='Search for a class...',  name="q", size="30", value= value? value: "", aria-label='Search', aria-describedby='basic-addon2')
+          .input-group-append
+            button#btnsubmit.btn.btn-primary(type='button')
+              i.fas.fa-search.fa-sm
       hr
       .d-flex.justify-content-start.flex-wrap
         each a in allClass
@@ -24,4 +27,14 @@ block content
             .card-body
               p.card-text
                 span= a.description
+
+block js
+  script.
+    var btn = document.getElementById('btnsubmit');
+    btn.addEventListener('click', function() {
+      document.myform.submit();
+    })
+    
+
+
    

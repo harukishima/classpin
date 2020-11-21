@@ -14,7 +14,7 @@ module.exports = {
           roles: 'admin',
           allows: [
             {
-              resources: '/users',
+              resources: '/admin',
               permissions: '*',
             },
           ]
@@ -28,7 +28,7 @@ module.exports = {
             },
             {
               resources: '/class',
-              permissions: 'get',
+              permissions: '*',
             },
             {
               resources: '/users',

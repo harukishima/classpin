@@ -1,12 +1,4 @@
 const User = require('../models/users.model');
-require('express-async-errors');
-module.exports.index = (req, res) => {
-  User.find({}).then(function(users) {
-      res.render('users/index', {
-          users: users
-      });
-  });
-}
 
 module.exports.profile = async (req, res) => {
   var passedVariable = req.query.valid;

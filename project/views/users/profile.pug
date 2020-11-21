@@ -8,7 +8,7 @@ block content
       .d-flex.content--m
         if(matchedUser)
           .item
-            img(src=matchedUser? matchedUser.avatar : "/images/unnamed.png", alt="avatar", style="width: 200px; height: 200px; border-radius: 100px;")
+            img(src= matchedUser.avatar ? matchedUser.avatar : "/images/unnamed.png", alt="avatar", style="width: 200px; height: 200px; border-radius: 100px;")
           .item.pt-5.pl-3
             ul
               li
