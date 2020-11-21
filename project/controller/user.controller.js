@@ -1,5 +1,5 @@
 const User = require('../models/users.model');
-
+require('express-async-errors');
 module.exports.index = (req, res) => {
   User.find({}).then(function(users) {
       res.render('users/index', {
@@ -8,14 +8,13 @@ module.exports.index = (req, res) => {
   });
 }
 
-module.exports.profile =  (req, res) => {
+module.exports.profile = async (req, res) => {
   var passedVariable = req.query.valid;
-  User.findById({_id: req.params.id}).then(function(user) {
-      res.render('users/profile', {
-          matchedUser: user,
-          passedVariable: passedVariable,
-      });
-  });
+  const user = await User.findById({_id: req.params.id});
+  res.render('users/profile', {
+    matchedUser: user,
+    passedVariable: passedVariable,
+});
 }
 
 module.exports.updateProfile = (req, res) => {

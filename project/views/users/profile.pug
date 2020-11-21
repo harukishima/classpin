@@ -6,16 +6,18 @@ block content
     .container.mt-3
       h1.ml-5.mb-5 Profile
       .d-flex.content--m
-        .item
-          img(src=matchedUser.avatar ? matchedUser.avatar : "/images/unnamed.png", alt="avatar", style="width: 200px; height: 200px; border-radius: 100px;")
-        .item.pt-5.pl-3
-          ul
-            li
-              strong= matchedUser.name
-            li= matchedUser.phone
-            li= matchedUser.email
-        
-          a.ml-4.btn.btn-outline-info(href="/users/updateprofile/"+ matchedUser.id) Update Profile
+        if(matchedUser)
+          .item
+            img(src=matchedUser? matchedUser.avatar : "/images/unnamed.png", alt="avatar", style="width: 200px; height: 200px; border-radius: 100px;")
+          .item.pt-5.pl-3
+            ul
+              li
+                strong= matchedUser.name
+              li= matchedUser.phone
+              li= matchedUser.email
+            a.ml-4.btn.btn-outline-info(href="/users/updateprofile/"+ matchedUser.id) Update Profile
+        else
+          p No information.
       if(passedVariable)
         p#msg(style="visibility: hidden;") #{passedVariable}
 
