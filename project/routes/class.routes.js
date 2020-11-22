@@ -10,5 +10,7 @@ router.post('/create', controller.postCreate);
 router.get('/search', controller.search);
 router.get('/:id', controller.classControl);
 router.post('/enroll', controller.postEnrollClass);
+router.get('/delete/:id', controller.getDelete);
+router.post('/delete/:id', controller.postDelete);
 
 module.exports = router;

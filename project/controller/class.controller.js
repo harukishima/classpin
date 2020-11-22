@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const shortid = require('shortid');
 
 module.exports.index = async (req, res) => {
+  var passedVariable = req.query.status;
   const allclass = await Classroom.aggregate([
     {
       $lookup:
@@ -16,7 +17,8 @@ module.exports.index = async (req, res) => {
     }
   ]);
   res.render('class/index', {
-    allClass: allclass
+    allClass: allclass,
+    msg: passedVariable
   })
 
 }
@@ -49,8 +51,10 @@ module.exports.postCreate = async (req, res) => {
 
 module.exports.classControl = async (req, res) => {
   const classroom = await Classroom.findById({_id: req.params.id});
+  const teacher = await User.findById({_id: classroom.teacher});
   res.render('class/classcontrol', {
-    classroom: classroom
+    classroom: classroom,
+    teacher: teacher
   });
 };
 
@@ -128,4 +132,39 @@ module.exports.postEnrollClass = async (req, res) => {
     console.log(error);
   }
   
+}
+
+
+module.exports.getDelete = async (req, res) => {
+  var classId = req.params.id;
+  const matchedClass = await Classroom.findOne({_id: classId});
+
+  res.render('class/deleteClass', {
+    matchedClass: matchedClass
+  })
+}
+
+module.exports.postDelete = async (req, res) => {
+  
+  const value = req.body.q;
+  const classId = req.params.id;
+  if(value) {
+    const teacher = await User.findById({_id: req.signedCookies.userId});
+    console.log(teacher._id);
+    const matchedClass = await Classroom.findById({_id: classId});
+    console.log(matchedClass.teacher);
+    if(teacher._id.toString() === matchedClass.teacher.toString()) {
+      Classroom.deleteOne({_id: matchedClass._id}, function(err) {
+        if(err) {
+          console.error(err);
+        }
+        console.log('success');
+        var string = encodeURIComponent("success");
+        res.redirect('/class'+ '/?status=' + string);
+      })
+      return;
+    }
+  }
+  // Khi khong co quyen
+  res.redirect('/class'+ '/?status=' + 'fail');
 }

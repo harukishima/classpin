@@ -1,8 +1,42 @@
-extends ../layout/common 
-
-block content
-  .block(style="height: 75vh; margin-top: 7rem")
-    .container.mt-3
-      h1 View Class
-      p= classroom.classname
-      p ID: #{classroom.joinId}
+doctype html
+head
+  title ClassPin
+  link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
+  link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js')
+  link(rel="stylesheet", href="/css/sidebar.css")
+.wrapper
+  nav#sidebar
+    .sidebar-header
+      h3 #{classroom.classname}
+      p.text-white #{teacher.name}
+      span ID: #{classroom.joinId}
+    ul.lisst-unstyled.components
+      li
+        a(href='#') Exam
+      li
+        a(href='#') Notifications
+      li
+        a(href='#') Documents
+    .text-center
+      a.btn.btn-danger.p-2(href="/class/delete/" + classroom._id) 
+        i.far.fa-trash-alt
+        |   Delete class
+  #content
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      .container-fluid
+        button#sidebarCollapse.btn.btn-info(type='button')
+          i.fas.fa-align-left
+        a.btn.btn-info(href="/class") Return to dashboard
+    br
+    br
+    
+script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
+script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl', crossorigin='anonymous')
+script.
+  $(document).ready(function () {
+  $('#sidebarCollapse').on('click', function () {
+  $('#sidebar').toggleClass('active');
+  });
+  });

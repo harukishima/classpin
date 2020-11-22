@@ -1,0 +1,40 @@
+doctype html
+head
+  title Title
+  // Required meta tags
+  meta(charset='utf-8')
+  meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  // Bootstrap CSS
+  link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T', crossorigin='anonymous')
+  link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous')
+
+  style.
+    body{
+    height: 100vh;
+    background-color: silver;
+    }
+.container-fluid.h-100
+  .row.h-100.align-items-center
+    .col-sm-12
+      .card.shadow.w-50.mx-auto.text-center
+        .card-header
+          i.fas.fa-exclamation-triangle
+          h4.d-inline.text-warning  Warning
+        .card-body
+          h4.card-title Are you sure to delete #{matchedClass.classname} ?
+          p.card-text if you sure, this class will no longer exist.
+          form(action="/class/delete/" + matchedClass._id, method="POST", name="myform")
+            input(type="hidden", value="submit", name="q")
+          button#btnYes.btn.btn-danger.mr-3 Yes
+          a#btnNo.btn.btn-secondary.mr-3(href="/class/" + matchedClass._id) No
+// Optional JavaScript
+// jQuery first, then Popper.js, then Bootstrap JS
+script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin='anonymous')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', integrity='sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1', crossorigin='anonymous')
+script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM', crossorigin='anonymous')
+
+script.
+  var btnYes = document.getElementById('btnYes');
+  btnYes.addEventListener('click', function() {
+    document.myform.submit();
+  });

@@ -5,10 +5,10 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light.text-secondary(style="z-index:
       #navbarNavAltMarkup.collapse.navbar-collapse
         .navbar-nav.ml-0
           a.nav-link.active(href='/')
-            | Dashboard
+            | Home
             span.sr-only (current)
-          a.nav-link(href='/class') Classroom
-        .dropdown.ml-auto
+          a.nav-link(href='/class') Dashboard
+        .dropdown.ml-auto.mr-4
           a#triggerId.btn.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
             span.mr-2.d-none.d-lg-inline.text-secondary-600.small #{user.name}
             img.img-profile.rounded-circle(src=user.avatar, style='height: 30px; width: 30px;')

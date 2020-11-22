@@ -3,6 +3,8 @@ extends ../layout/common
 block content
   .block(style="min-height: 90vh; margin-top: 7rem")
     .container.mt-3
+      if(msg)
+        p#msg(style="visibility: hidden;") #{msg}
       h1 Your class
       .btn-group.ml-5
         button.btn.btn-primary.dropdown-toggle.dropdown-toggle-split(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
@@ -30,10 +32,12 @@ block content
 
 block js
   script.
-    var btn = document.getElementById('btnsubmit');
-    btn.addEventListener('click', function() {
-      document.myform.submit();
-    })
+    var msg = document.getElementById('msg');
+    if(msg.textContent === "success") {
+      Swal.fire('Deleted successfully!', '', 'success');
+    } else {
+      Swal.fire('Sorry, an error has occurred !', '', 'info');
+    }
     
 
 
