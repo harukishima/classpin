@@ -1,0 +1,45 @@
+extends ./classcontrol
+
+block content
+  .container
+    .card.shadow
+      .card-header.text-center
+        strong Create Exercise
+      .card-body
+        form#myform(action="/class/" + classroom._id + "/exercise/create", method="POST", name="myform")
+          .row
+            .col-sm-6
+              .form-group
+                label(for="title") Title
+                textarea#title.form-control(name="title", cols="30", rows="1", placeholder="Title")
+              .form-group
+                label(for="description") Description 
+                textarea#description.form-control(name="description", cols="30", rows="5" placeholder="optional")
+            .col-sm-3
+              .form-group
+                label(for="datebegin") Date begin
+                input#datebegin.form-control(type='date', size="8", name="datebegin")
+              .form-group
+                label(for="dateend") Date end
+                input#dateend.form-control(type='date', size="8", name="dateend")
+              .form-group
+                label(for="time") Time (minute)
+                input.form-control#time(type="number", name="time")
+            .col-sm-3
+              .form-group
+                label(for="timebegin") Time begin
+                input#timebegin.form-control(type="time", name="timebegin") 
+              .form-group
+                label(for="timebegin") Time end
+                input#timebegin.form-control(type="time", name="timeend") 
+              
+          .text-center
+            button#btnsubmit.btn.btn-custom Publish
+                      
+
+block js
+  script.
+    var btnsubmit = document.getElementById('btnsubmit');
+    btnsubmit.addEventListener('click', function() {
+      document.myform.submit();
+    });

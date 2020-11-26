@@ -1,5 +1,6 @@
 const Classroom = require('../models/class.model');
 const User = require('../models/users.model');
+const Exercise = require('../models/Exercise.model');
 const mongoose = require('mongoose');
 const shortid = require('shortid');
 
@@ -150,9 +151,9 @@ module.exports.postDelete = async (req, res) => {
   const classId = req.params.id;
   if(value) {
     const teacher = await User.findById({_id: req.signedCookies.userId});
-    console.log(teacher._id);
+    
     const matchedClass = await Classroom.findById({_id: classId});
-    console.log(matchedClass.teacher);
+    
     if(teacher._id.toString() === matchedClass.teacher.toString()) {
       Classroom.deleteOne({_id: matchedClass._id}, function(err) {
         if(err) {
@@ -167,4 +168,61 @@ module.exports.postDelete = async (req, res) => {
   }
   // Khi khong co quyen
   res.redirect('/class'+ '/?status=' + 'fail');
+}
+
+module.exports.allMembers = async (req, res) => {
+  const classId = req.params.id;
+  console.log(classId);
+  const matchedClass = await Classroom.findById({_id: classId});
+  const allMembers = await User.find({_id: {$in : matchedClass.listusers}});
+  const teacher = await User.findById({_id: matchedClass.teacher});
+  console.log(allMembers);
+  res.render('class/allMembers', {
+    allMembers : allMembers,
+    classroom : matchedClass,
+    teacher: teacher
+  });
+}
+
+module.exports.exercise = async (req, res) => {
+  const classId = req.params.id;
+  console.log(classId);
+  const matchedClass = await Classroom.findById({_id: classId});
+  
+  const teacher = await User.findById({_id: matchedClass.teacher});
+  res.render('class/exercise', {
+    classroom : matchedClass,
+    teacher : teacher,
+  });
+}
+
+module.exports.createExercise = async (req, res) => {
+  const classId = req.params.id;
+  console.log(classId);
+  const matchedClass = await Classroom.findById({_id: classId});
+  const teacher = await User.findById({_id: matchedClass.teacher});
+  res.render('class/formCreateExercise', {
+    classroom : matchedClass,
+    teacher : teacher,
+  })
+}
+
+module.exports.postCreateEx = async (req, res) => {
+  console.log(req.body);
+  const dateBegin = req.body.datebegin + " " + req.body.timebegin;
+  const dateEnd = req.body.dateend + " " + req.body.timeend;
+  const newExercise = new Exercise();
+  newExercise._id = mongoose.Types.ObjectId();
+  newExercise.title = req.body.title;
+  newExercise.description = req.body.description;
+  newExercise.dateBegin = new Date(dateBegin);
+  console.log(newExercise.dateBegin);
+  newExercise.dateEnd = new Date(dateEnd);
+  newExercise.time = req.body.time;
+  newExercise.save(function(err) {
+    if(err) {
+      console.log(err);
+    }
+    //saved
+  })
 }

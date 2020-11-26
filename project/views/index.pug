@@ -1,18 +1,22 @@
-extends ./layout/common
+extends ./layout/common2
 
 block head
   link(rel="stylesheet", href="/css/style.css")
 
 block content
-  .block(style="height: 150vh; margin-top: 2rem")
+  .block(style="height: 150vh;")
+    .adv Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis, architecto!. 
+      a(href="#") Get it!
     header
+      .navigation(style="display: block; padding-top: -50x;")
+        include ./layout/navtransparent.pug
       .text-box
         h3.heading-primary
           span.heading-primary__main
             | ClassPin!
           span.heading-primary__sub
             | Class of the future!
-        a.button.button--white.button--animated(href="/class") Go to your class
+        a.button.button--blue.button--animated(href="/class") Go to your class
     .custom-card
       .card-img
         img#img_header(src="/images/humangroups2.jpg", alt="card-img")

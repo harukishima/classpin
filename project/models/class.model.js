@@ -8,7 +8,7 @@ const Classschema = new Schema({
   teacher: mongoose.ObjectId,
   subject: String,
   joinId: String,
-  datebegin: Date,
+  datebegin: { type: Date, default: Date.now },
   description: String,
 });
 

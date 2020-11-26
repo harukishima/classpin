@@ -1,9 +1,11 @@
 doctype html
 head
   title ClassPin
+  link(rel="preconnect" href="https://fonts.gstatic.com")
+  link(href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,900&display=swap" rel="stylesheet")
   link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
   link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css')
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js')
+  link#bootstrap-css(href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.css', rel='stylesheet')
   link(rel="stylesheet", href="/css/sidebar.css")
 .wrapper
   nav#sidebar
@@ -13,9 +15,11 @@ head
       span ID: #{classroom.joinId}
     ul.lisst-unstyled.components
       li
-        a(href='#') Exam
+        a(href='/class/' + classroom._id + '/exercise') Exercise
       li
         a(href='#') Notifications
+      li
+        a(href='/class/' + classroom._id + '/members') Members
       li
         a(href='#') Documents
     .text-center
@@ -23,20 +27,27 @@ head
         i.far.fa-trash-alt
         |   Delete class
   #content
-    nav.navbar.navbar-expand-lg.navbar-light.bg-light
-      .container-fluid
+    nav.navbar.navbar-expand-lg.navbar-light(style="background-color: #fafafa;")
+      .container-fluid(style="background-color: #fafafa;")
         button#sidebarCollapse.btn.btn-info(type='button')
           i.fas.fa-align-left
         a.btn.btn-info(href="/class") Return to dashboard
     br
     br
+    block content
     
-script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
-script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
-script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl', crossorigin='anonymous')
+script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin='anonymous')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', integrity='sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1', crossorigin='anonymous')
+script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM', crossorigin='anonymous')
+script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js')
+script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js')
+
+
 script.
   $(document).ready(function () {
   $('#sidebarCollapse').on('click', function () {
   $('#sidebar').toggleClass('active');
   });
   });
+
+block js
