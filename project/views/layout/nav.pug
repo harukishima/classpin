@@ -11,7 +11,7 @@ nav.navbar.navbar-expand-lg.navbar-light.text-white(style="z-index: 100; positio
         .dropdown.ml-auto.mr-4
           a#triggerId.btn.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
             span.mr-3.d-none.d-lg-inline.text-secondary-600 #{user.name}
-            img.img-profile.rounded-circle(src=user.avatar, style='height: 30px; width: 30px;')
+            img.img-profile.rounded-circle(src=user.avatar ? user.avatar : "/images/unnamed.png", style='height: 30px; width: 30px;')
             a
               .dropdown-menu(aria-labelledby='triggerId')
                 a.dropdown-item(href="/users/" + user._id)

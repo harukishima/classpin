@@ -6,7 +6,7 @@ module.exports.profile = async (req, res) => {
   res.render('users/profile', {
     matchedUser: user,
     passedVariable: passedVariable,
-});
+  });
 }
 
 module.exports.updateProfile = (req, res) => {

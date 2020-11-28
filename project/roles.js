@@ -39,8 +39,6 @@ module.exports = {
       ]);
       
       acl.addRoleParents('admin', 'user');
-      // acl.addUserRoles("5f91993cd9f266110c46667e", "user");
-      // acl.addUserRoles("5f93feaedad8cc06640d1718", "admin");
 
       fn(acl);
     }

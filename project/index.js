@@ -14,6 +14,7 @@ const signupRoutes = require('./routes/signup.routes');
 const classRoutes = require('./routes/class.routes');
 const guideRoutes = require('./routes/guide.routes');
 const authMiddleware = require('./middleware/login.middleware');
+const localsUserMiddleware = require('./middleware/localsUser.middleware');
 const adminRoutes = require('./routes/admin.routes.js');
 
 
@@ -47,7 +48,7 @@ function initRoutes(acl) {
     })
   });
   
-  app.get('/', authMiddleware.authRequire, (req, res) => {
+  app.get('/', localsUserMiddleware.localsUser, (req, res) => {
     res.render('index');
   });
   

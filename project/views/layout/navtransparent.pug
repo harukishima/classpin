@@ -2,33 +2,35 @@ nav.navbar.navbar-expand-lg.navbar-light.text-white(style="z-index: 100; positio
       a.navbar-brand.ml-5.text-white(href='/') ClassPin
       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNavAltMarkup', aria-controls='navbarNavAltMarkup', aria-expanded='false', aria-label='Toggle navigation')
         span.navbar-toggler-icon
-      #navbarNavAltMarkup.collapse.navbar-collapse
+      #navbarNavAltMarkup.collapse.navbar-collapse.text-center
         .navbar-nav.ml-0
           a.text-white.nav-link.active(href='/')
             | Home
             span.sr-only (current)
           a.text-white.nav-link(href='/class') Dashboard
         .dropdown.ml-auto.mr-4
-          a#triggerId.btn.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-            span.mr-3.d-none.d-lg-inline.text-secondary-600 #{user.name}
-            img.img-profile.rounded-circle(src=user.avatar, style='height: 30px; width: 30px;')
-            a
-              .dropdown-menu(aria-labelledby='triggerId')
-                a.dropdown-item(href="/users/" + user._id)
-                  i.fas.fa-user.fa-sm.fa-fw.mr-2.text-gray-400
-                  |           Profile
-                a.dropdown-item(href='#')
-                  i.fas.fa-cogs.fa-sm.fa-fw.mr-2.text-gray-400
-                  |           Settings
-                a.dropdown-item(href='#')
-                  i.fas.fa-list.fa-sm.fa-fw.mr-2.text-gray-400
-                  |           Activity Log
-                .dropdown-divider
-                .text-center
-                  a.btn.btn-danger(href="/logout")
-                    i.fas.fa-sign-out-alt.fa-sm.fa-fw.mr-2.text-gray-400
-                    |           Logout
-          
+          if (user)
+            a#triggerId.btn.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+              span.mr-3.d-none.d-lg-inline.text-secondary-600 #{user.name}
+              img.img-profile.rounded-circle(src=user.avatar ? user.avatar : "/images/unnamed.png", style='height: 30px; width: 30px;')
+              a
+                .dropdown-menu(aria-labelledby='triggerId')
+                  a.dropdown-item(href="/users/" + user._id)
+                    i.fas.fa-user.fa-sm.fa-fw.mr-2.text-gray-400
+                    |           Profile
+                  a.dropdown-item(href='#')
+                    i.fas.fa-cogs.fa-sm.fa-fw.mr-2.text-gray-400
+                    |           Settings
+                  a.dropdown-item(href='#')
+                    i.fas.fa-list.fa-sm.fa-fw.mr-2.text-gray-400
+                    |           Activity Log
+                  .dropdown-divider
+                  .text-center
+                    a.btn.btn-danger(href="/logout")
+                      i.fas.fa-sign-out-alt.fa-sm.fa-fw.mr-2.text-gray-400
+                      |           Logout
+          else
+            a.mr-3.btn.text-white.font-weight-bold(href="/login", style="background-color: #003f8c; padding: 7px 20px") Sign in
       //-     if(user)
       //-       a.nav-link(href="/users/" + user._id) Profile
       //- span.text-right.mr-3(style="color: #000")= "hello, " + user.name

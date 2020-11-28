@@ -18,7 +18,10 @@ a:focus{
 
 /* Side Bar*/
 
-
+.active {
+	color: #7386D5;
+	background: #fff;
+}
 
 #sidebar.active {
     margin-left: -250px;
@@ -65,7 +68,7 @@ a:focus{
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
 	color: #fff;
-	background: #051e34;
+	background:  #fff;
 }
 
 a[data-toggle="collapse"]{
@@ -116,6 +119,7 @@ ul ul a{
 #myform{
 	font-weight: 50%;
 }
+
 
 
 

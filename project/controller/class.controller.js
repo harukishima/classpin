@@ -35,20 +35,26 @@ module.exports.enroll = (req, res) => {
 }
 
 module.exports.postCreate = async (req, res) => {
-  const user = await User.findById({_id: req.signedCookies.userId});
-  const newClass= new Classroom();
-  newClass._id = mongoose.Types.ObjectId();
-  newClass.classname = req.body.classname;
-  newClass.datebegin = new Date;
-  newClass.subject = req.body.subject,
-  newClass.joinId = shortid.generate();
-  newClass.listusers.push(user._id);
-  newClass.teacher = user._id;
-  newClass.description = req.body.description;
-  newClass.subject = req.body.subject;
-  await newClass.save();
-  res.redirect('/class/' + newClass._id);
-};  
+  try {
+    const user = await User.findById({_id: req.signedCookies.userId});
+    const newClass= new Classroom();
+    newClass._id = mongoose.Types.ObjectId();
+    newClass.classname = req.body.classname;
+    newClass.datebegin = new Date;
+    newClass.subject = req.body.subject,
+    newClass.joinId = shortid.generate();
+    newClass.listusers.push(user._id);
+    newClass.teacher = user._id;
+    newClass.description = req.body.description;
+    newClass.subject = req.body.subject;
+    await newClass.save();
+    var string = encodeURIComponent("createsuccess");
+    res.redirect('/class' + '/?status=' + string);
+  } catch (err) {
+    var string = encodeURIComponent("fail");
+    res.redirect('/class' + '/?status=' + string);
+  }
+};
 
 module.exports.classControl = async (req, res) => {
   const classroom = await Classroom.findById({_id: req.params.id});

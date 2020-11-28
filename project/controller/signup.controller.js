@@ -1,6 +1,7 @@
 const User = require('../models/users.model');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');   
+const node_acl = require('acl');
 
 module.exports.index = (req, res) => {
   res.render('auth/register', {});
@@ -38,6 +39,10 @@ module.exports.postSignup = async (req, res) => {
     }
     //save
   });
+
+  // add user role
+  var acl = new node_acl(new node_acl.mongodbBackend(mongoose.connection.db, 'acl_'));
+  acl.addUserRoles(newUser._id.toString(), "user");
 
   res.redirect('/login');
 }
