@@ -1,34 +1,60 @@
 extends ./classcontrol 
 
 block content
-  h1 Exercise
-  .row.mt-5
-    .col-sm-3
-      .card
-        .card-body
-          h5.card-title Card title
-          h6.card-subtitle.mb-2.text-muted Card subtitle
-          p.card-text
-            | Some quick example text to build on the card title and make up the bulk of the card&apos;s content.
-          a.card-link(href='#') Card link
-          a.card-link(href='#') Another link
-    .col-sm-9
-      h4.bold 
-        i.fas.fa-list.mr-2
-        | Archive exercises
-      .text-center
-        a.btn.btn-custom(href="/class/" + classroom._id + "/exercise/create") Create
-      hr.mb-4
-      each exercise in allExercise
-        .card.mb-3
-          .card-header.d-flex.justify-content-between.flip
-            h4.card-title #{exercise.title}
-            .pencil
-              a.btn.btn-primary(href="#")
-                i.fas.fa-pencil-alt
-          .card-body.panel
-            p.card-text #{exercise.description}
-
+  .container.pl-5.pr-5
+    h1.text-white Exercise
+    .row.mt-5
+      .col-sm-3
+        .card
+          .card-body
+            h5.card-title 
+              i.fas.fa-exclamation-triangle.mr-2
+              | Attention
+            p.card-text
+              | The pending exercises are the exercises in the waiting list. The members won't see these exercises until you hit publish!
+            //- a.card-link(href='#') Card link
+            //- a.card-link(href='#') Another link
+      .col-sm-9
+        .card
+          .card-body
+            h4.bold
+              i.fas.fa-list.mr-2
+              | Pending exercises
+            .text-center
+              a.btn.btn-custom(href="/class/" + classroom._id + "/exercise/create") Create
+            hr.mb-4
+            if(pendingExercise.length)
+              each exercise in pendingExercise
+                .card.mb-3
+                  .card-header.d-flex.justify-content-between.flip
+                    h5.card-title #{exercise.title}
+                    .pencil
+                      a.btn.btn-primary(href="/class/" + classroom._id + "/exercise/" + exercise._id)
+                        i.fas.fa-pencil-alt
+                  .card-body.panel
+                    p.card-text #{exercise.description}
+                    a.btn.btn-primary(href="#") Publish
+            else
+              .text-center
+                p No exercises have been added.
+            hr.mb-4
+            h4.bold
+              i.fas.fa-list.mr-2
+              | Published exercises
+            hr.mb-4
+            if(publishedExercise.length)
+              each exercise in publishedExercise
+                .card.mb-3
+                  .card-header.d-flex.justify-content-between.flip
+                    h5.card-title #{exercise.title}
+                    .pencil
+                      a.btn.btn-primary(href="/class/" + classroom._id + "/exercise/" + exercise._id)
+                        i.fas.fa-pencil-alt
+                  .card-body.panel
+                    p.card-text #{exercise.description}
+            else
+              .text-center
+                p No exercises have been published.
 block js
   script.
     $(document).ready(function() {

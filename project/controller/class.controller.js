@@ -188,9 +188,11 @@ module.exports.allMembers = async (req, res) => {
 
 module.exports.exercise = async (req, res) => {
   const classroom = res.locals.classroom;
-  const allExercise = await Exercise.find({_id: {$in : classroom.listExam}}).sort({dateCreated: -1});
+  const pendingExercise = await Exercise.find({_id: {$in : classroom.listExam}, status : 'pending'}).sort({dateCreated: -1});
+  const publishedExercise = await Exercise.find({_id: {$in : classroom.listExam}, status : 'published'}).sort({dateCreated: -1});
   res.render('class/exercise', {
-    allExercise : allExercise,
+    pendingExercise : pendingExercise,
+    publishedExercise : publishedExercise
   });
 }
 
@@ -219,4 +221,13 @@ module.exports.postCreateEx = async (req, res) => {
   // Them de thi vao lop hoc
   await Classroom.updateOne({_id: req.params.id}, {$addToSet : {listExam : newExercise._id}});
   res.redirect('/class/' + req.params.id + '/exercise');
+}
+
+module.exports.updateExercise = async (req, res) => {
+  const exerciseId = req.params.idex;
+  const exercise = await Exercise.findById({_id: exerciseId});
+
+  res.render('class/updateExercise', {
+    exercise : exercise
+  });
 }

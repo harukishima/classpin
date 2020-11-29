@@ -1,22 +1,23 @@
 extends ./classcontrol
 
 block content
-  .container
-    .text-center
-      h2 All Members
-    table.mt-4.table.table-bordered.text-center
-      thead.thead-dark
-        tr
-          th Avatar
-          th Name
-          th Phone
-          th View
-      
-      each member in allMembers
-        tr
-          td
-            img(src=member.avatar ? member.avatar : "/images/unnamed.png", alt="member-avatar", style="width: 80px; height: 80px; border-radius: 50px")
-          td= member.name
-          td= member.phone
-          td
-            a.btn.btn-primary(href="/users/" + member._id) View 
+  .container.mt-3.pl-5.pr-5
+    .card
+      .card-body
+        .text-center
+          h2 All Members
+        table.mt-5.table.table-bordered.text-center#mytable
+          thead.thead-dark
+            tr
+              th Avatar
+              th Name
+              th Phone
+              th View
+          each member in allMembers
+            tr
+              td
+                img(src=member.avatar ? member.avatar : "/images/unnamed.png", alt="member-avatar", style="width: 80px; height: 80px; border-radius: 50px")
+              td= member.name
+              td= member.phone
+              td
+                a.btn.btn-primary(href="/users/" + member._id) View 

@@ -1,43 +1,44 @@
-extends ./classcontrol
+extends ./classcontrol 
 
 block content
-  .container.mt-5.p-5
+  .container.p-5
+    h1 Update exercise
     .card.shadow
       .card-header.text-center
-        strong Create Exercise
+        strong Update Exercise
       .card-body
         form#myform(action="/class/" + classroom._id + "/exercise/create", method="POST", name="myform" enctype="multipart/form-data")
           .row
             .col-sm-6
               .form-group
                 label(for="title") Title
-                textarea#title.form-control(name="title", cols="30", rows="1", placeholder="Title")
+                textarea#title.form-control(name="title", cols="30", rows="1", placeholder="Title") #{exercise.title}
               .form-group
                 label(for="description") Description 
-                textarea#description.form-control(name="description", cols="30", rows="5" placeholder="optional")
+                textarea#description.form-control(name="description", cols="30", rows="5" placeholder="optional") #{exercise.description}
             .col-sm-3
               .form-group
                 label(for="datebegin") Date begin
-                input#datebegin.form-control(type='date', size="8", name="datebegin")
+                input#datebegin.form-control(type='date', size="8", name="datebegin", value=exercise.dateBegin) 
               .form-group
                 label(for="dateend") Date end
-                input#dateend.form-control(type='date', size="8", name="dateend")
+                input#dateend.form-control(type='date', size="8", name="dateend", value=exercise.dateEnd)
               .form-group
                 label(for="time") Time (minute)
-                input.form-control#time(type="number", name="time")
+                input.form-control#time(type="number", name="time", value=exercise.time)
             .col-sm-3
               .form-group
                 label(for="timebegin") Time begin
-                input#timebegin.form-control(type="time", name="timebegin") 
+                input#timebegin.form-control(type="time", name="timebegin", value=exercise.timeBegin) 
               .form-group
                 label(for="timebegin") Time end
-                input#timebegin.form-control(type="time", name="timeend") 
+                input#timebegin.form-control(type="time", name="timeend", value=exercise.timeEnd) 
               .form-group
                 label(for="file") PDF
                 input#file(type="file", name="pdf")
       .card-footer.text-center
         a.btn.btn-secondary.mr-5(href="/class/" + classroom._id + "/exercise") Back to list
-        button#btnsubmit.btn.btn-primary Create
+        button#btnsubmit.btn.btn-primary Save
         
                       
 

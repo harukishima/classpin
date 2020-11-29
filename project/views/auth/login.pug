@@ -1,93 +1,179 @@
+//- doctype html
+//- head
+//-   title Login
+//-   link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css', integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO', crossorigin='anonymous')
+//-   script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+//-   link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.6.1/css/all.css', integrity='sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP', crossorigin='anonymous')
+//-   style.
+//-     body,
+//-     html {
+//-     margin: 0;
+//-     padding: 0;
+//-     height: 100%;
+//-     background: #7abecc !important;
+//-     }
+//-     .user_card {
+//-     width: 350px;
+//-     margin-top: auto;
+//-     margin-bottom: auto;
+//-     background: #74cfbf;
+//-     position: relative;
+//-     display: flex;
+//-     justify-content: center;
+//-     flex-direction: column;
+//-     padding: 10px;
+//-     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+//-     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+//-     -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+//-     border-radius: 5px;
+//-     }
+//-     .form_container {
+//-     margin-top: 20px;
+//-     }
+//-     #form-title{
+//-     color: #fff;
+//-     }
+//-     .login_btn {
+//-     width: 100%;
+//-     background: #33ccff !important;
+//-     color: white !important;
+//-     }
+//-     .login_btn:focus {
+//-     box-shadow: none !important;
+//-     outline: 0px !important;
+//-     }
+//-     .login_container {
+//-     padding: 0 2rem;
+//-     }
+//-     .input-group-text {
+//-     background: #f7ba5b !important;
+//-     color: white !important;
+//-     border: 0 !important;
+//-     border-radius: 0.25rem 0 0 0.25rem !important;
+//-     }
+//-     .input_user,
+//-     .input_pass:focus {
+//-     box-shadow: none !important;
+//-     outline: 0px !important;
+//-     }
+//-     #messages{
+//-     background-color: grey;
+//-     color: #fff;
+//-     padding: 10px;
+//-     margin-top: 10px;
+//-     }
+//- .container.h-100
+//-   .d-flex.justify-content-center.h-100
+//-     .user_card
+//-       .d-flex.justify-content-center
+//-         h3#form-title LOGIN
+//-       .d-flex.justify-content-center.form_container
+//-         form(method='POST', action='/login')
+//-           .input-group.mb-3
+//-             .input-group-append
+//-               span.input-group-text
+//-                 i.fas.fa-user
+//-             input.form-control(type='text', name='namelogin', placeholder='Username...' required)
+//-           .input-group.mb-2
+//-             .input-group-append
+//-               span.input-group-text
+//-                 i.fas.fa-key
+//-             input.form-control(type='password', name='password', placeholder='Password...' required)
+//-           if(msg)
+//-             p.text-success= msg
+//-           if (errors)
+//-             each error in errors
+//-               p.text-danger= error
+//-               hr
+//-           .d-flex.justify-content-center.mt-3.login_container
+//-             input.btn.login_btn(type='submit', value='Login')
+//-       .mt-4
+//-         .d-flex.justify-content-center.links
+//-           | Don&apos;t have an account? 
+//-           a.ml-2(href="/signup") Sign Up
+
+
 doctype html
 head
-  title Login
-  link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css', integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO', crossorigin='anonymous')
-  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
-  link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.6.1/css/all.css', integrity='sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP', crossorigin='anonymous')
-  style.
-    body,
-    html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background: #7abecc !important;
-    }
-    .user_card {
-    width: 350px;
-    margin-top: auto;
-    margin-bottom: auto;
-    background: #74cfbf;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 5px;
-    }
-    .form_container {
-    margin-top: 20px;
-    }
-    #form-title{
-    color: #fff;
-    }
-    .login_btn {
-    width: 100%;
-    background: #33ccff !important;
-    color: white !important;
-    }
-    .login_btn:focus {
-    box-shadow: none !important;
-    outline: 0px !important;
-    }
-    .login_container {
-    padding: 0 2rem;
-    }
-    .input-group-text {
-    background: #f7ba5b !important;
-    color: white !important;
-    border: 0 !important;
-    border-radius: 0.25rem 0 0 0.25rem !important;
-    }
-    .input_user,
-    .input_pass:focus {
-    box-shadow: none !important;
-    outline: 0px !important;
-    }
-    #messages{
-    background-color: grey;
-    color: #fff;
-    padding: 10px;
-    margin-top: 10px;
-    }
-.container.h-100
-  .d-flex.justify-content-center.h-100
-    .user_card
-      .d-flex.justify-content-center
-        h3#form-title LOGIN
-      .d-flex.justify-content-center.form_container
-        form(method='POST', action='/login')
-          .input-group.mb-3
-            .input-group-append
-              span.input-group-text
-                i.fas.fa-user
-            input.form-control(type='text', name='namelogin', placeholder='Username...' required)
-          .input-group.mb-2
-            .input-group-append
-              span.input-group-text
-                i.fas.fa-key
-            input.form-control(type='password', name='password', placeholder='Password...' required)
-          if(msg)
-            p.text-success= msg
-          if (errors)
-            each error in errors
-              p.text-danger= error
-              hr
-          .d-flex.justify-content-center.mt-3.login_container
-            input.btn.login_btn(type='submit', value='Login')
-      .mt-4
-        .d-flex.justify-content-center.links
-          | Don&apos;t have an account? 
-          a.ml-2(href="/signup") Sign Up
+  meta(charset='UTF-8')
+  meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  script(src='https://kit.fontawesome.com/64d58efce2.js', crossorigin='anonymous')
+  link(rel='stylesheet', href='/css/loginsignup.css')
+  title Sign in &amp; Sign up Form
+.container
+  .forms-container
+    .signin-signup
+      form.sign-in-form(method='POST', action='/login')
+        h2.title Sign in
+        .input-field
+          i.fas.fa-user
+          input(type='text', placeholder='Username', name='namelogin')
+        .input-field
+          i.fas.fa-lock
+          input(type='password', placeholder='Password', name='password')
+        input.btn.solid(type='submit', value='Login')
+        p.social-text Or Sign in with social platforms
+        .social-media
+          a.social-icon(href='#')
+            i.fab.fa-facebook-f
+          a.social-icon(href='#')
+            i.fab.fa-twitter
+          a.social-icon(href='#')
+            i.fab.fa-google
+          a.social-icon(href='#')
+            i.fab.fa-linkedin-in
+      form.sign-up-form(method='POST', action='/signup')
+        h2.title Sign up
+        .input-field
+          i.fas.fa-user
+          input(type='text', placeholder='Username', name='namelogin', required)
+        .input-field
+          i.fas.fa-signature
+          input(type='text', placeholder='Full Name', name='fullname', required)
+        .input-field
+          i.fas.fa-envelope
+          input(type='email', placeholder='Email', name='email', required)
+        .input-field
+          i.fas.fa-phone
+          input(type='number', placeholder='Phone', name='phone', required)
+        .input-field
+          i.fas.fa-lock
+          input(type='password', placeholder='Password', name='password1', minlength="8", maxlength="30", required)
+        .input-field
+          i.fas.fa-lock
+          input(type='password', placeholder='Password', name='password2', minlength="8", maxlength="30", required)
+        if (errors)
+          each error in errors
+            span.text-danger= error
+        input.btn(type='submit', value='Sign up')
+        p.social-text Or Sign up with social platforms
+        .social-media
+          a.social-icon(href='#')
+            i.fab.fa-facebook-f
+          a.social-icon(href='#')
+            i.fab.fa-twitter
+          a.social-icon(href='#')
+            i.fab.fa-google
+          a.social-icon(href='#')
+            i.fab.fa-linkedin-in
+  .panels-container
+    .panel.left-panel
+      .content
+        h3 New here ?
+        p
+          | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
+          | ex ratione. Aliquid!
+        button#sign-up-btn.btn.transparent
+          | Sign up
+      img.image(src='/images/log.svg', alt='')
+    .panel.right-panel
+      .content
+        h3 One of us ?
+        p
+          | Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+          | laboriosam ad deleniti.
+        button#sign-in-btn.btn.transparent
+          | Sign in
+      img.image(src='/images/register.svg', alt='')
+script(src='/js/app.js')
+

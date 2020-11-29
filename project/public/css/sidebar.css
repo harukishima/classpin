@@ -1,5 +1,5 @@
 body{
-	font-family: 'Lato', sans-serif;
+	font-family: "Poppins", sans-serif;
 	background: #fafafa;
 }
 p{
@@ -130,7 +130,19 @@ ul ul a{
 	display: none;
 }
 
+.background-blue {
+	padding: 180px;
+	width: 100%;
+	background-color:#3498db;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+}
 
+#mytable tr td{
+	vertical-align: middle;
+}
 
 
 

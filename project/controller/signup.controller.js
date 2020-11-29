@@ -10,15 +10,15 @@ module.exports.index = (req, res) => {
 module.exports.postSignup = async (req, res) => {
   const userExisted = await User.findOne({namelogin: req.body.namelogin});
   if(userExisted) {
-    res.render('auth/register', {
-      errors: "Username already exists"
+    res.render('auth/login', {
+      errors: ["Username already exists!"]
     });
     return;
   }
 
   if(req.body.password1 !== req.body.password2) {
-    res.render('auth/register', {
-      errors: "Password did'nt match"
+    res.render('auth/login', {
+      errors: ["Password did'nt match!"]
     });
     return;
   }

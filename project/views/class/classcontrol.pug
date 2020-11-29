@@ -2,11 +2,9 @@ doctype html
 head
   title CLASSPIN | CLASS OF THE FUTURE
   link(rel="preconnect" href="https://fonts.gstatic.com")
-  link(href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,900&display=swap" rel="stylesheet")
+  link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap")
   link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
   link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css')
-  link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous')
-  link#bootstrap-css(href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.css', rel='stylesheet')
   link(rel="stylesheet", href="/css/sidebar.css")
 .wrapper
   nav#sidebar
@@ -17,40 +15,61 @@ head
     ul.lisst-unstyled.components
       li
         if (Active == "overview")
-          a.active(href='/class/' + classroom._id) Overview
+          a.active(href='/class/' + classroom._id) 
+            i.fas.fa-home.mr-3
+            |   Overview
         else
-          a(href='/class/' + classroom._id) Overview
+          a(href='/class/' + classroom._id)
+            i.fas.fa-home.mr-3
+            |   Overview
       li
         if (Active == "exercise")
-          a.active(href='/class/' + classroom._id + '/exercise') Exercise
+          a.active(href='/class/' + classroom._id + '/exercise') 
+            i.fas.fa-book.mr-3
+            |   Exercise
         else
-          a(href='/class/' + classroom._id + '/exercise') Exercise
+          a(href='/class/' + classroom._id + '/exercise')
+            i.fas.fa-book.mr-3
+            |   Exercise
       li
         if (Active == "notify")
-          a.active(href='#') Notifications
+          a.active(href='#') 
+            i.fas.fa-bell.mr-3
+            |   Notifications
         else
-          a(href='#') Notifications
+          a(href='#')
+            i.fas.fa-bell.mr-3
+            |   Notifications
       li
         if (Active == "member")
-          a.active(href='/class/' + classroom._id + '/members') Members
+          a.active(href='/class/' + classroom._id + '/members')
+            i.fas.fa-users.mr-2
+            |   Members
         else
-          a(href='/class/' + classroom._id + '/members') Members
+          a(href='/class/' + classroom._id + '/members')
+            i.fas.fa-users.mr-2
+            |   Members
       li
         if (Active == "document")
-          a.active(href='#') Documents
+          a.active(href='#') 
+            i.far.fa-file-alt.mr-3
+            |   Documents
         else
-          a(href='#') Documents
+          a(href='#')
+            i.far.fa-file-alt.mr-3
+            |   Documents
     .text-center
       a.btn.btn-danger.p-2(href="/class/delete/" + classroom._id) 
         i.far.fa-trash-alt
         |   Delete class
+  .background-blue
   .scrollable
     #content
-      nav.navbar.navbar-expand-lg.navbar-light(style="background-color: #fafafa;")
-        .container-fluid(style="background-color: #fafafa;")
-          button#sidebarCollapse.btn.btn-info(type='button')
+      nav.navbar.navbar-expand-lg.navbar-light(style="background-color: :#3498db;")
+        .container-fluid(style="background-color: :#3498db")
+          button#sidebarCollapse.btn.btn-secondary(type='button')
             i.fas.fa-align-left
-          a.btn.btn-info(href="/class") Return to dashboard
+          a.btn.btn-secondary(href="/class") Return to dashboard
       br
       block content
     

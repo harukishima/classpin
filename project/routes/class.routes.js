@@ -25,5 +25,6 @@ router.get('/:id/members', memberActive.localsActive, localsClassTeacher.localsC
 router.get('/:id/exercise', exerciseActive.localsActive, localsClassTeacher.localsClassTeacher, controller.exercise);
 router.get('/:id/exercise/create', exerciseActive.localsActive, localsClassTeacher.localsClassTeacher, controller.createExercise);
 router.post('/:id/exercise/create', exerciseActive.localsActive, upload.single('pdf') , controller.postCreateEx);
+router.get('/:id/exercise/:idex', exerciseActive.localsActive, localsClassTeacher.localsClassTeacher, controller.updateExercise);
 
 module.exports = router;
