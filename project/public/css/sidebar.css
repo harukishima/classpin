@@ -88,6 +88,12 @@ ul ul a{
 	background: #051e34;
 }
 
+.scrollable {
+	overflow-y: scroll;
+	height: 100vh;
+	width: 100%;
+}
+
 #content{
 	width: 100%;
 	padding: 20px;
@@ -120,6 +126,9 @@ ul ul a{
 	font-weight: 50%;
 }
 
+.panel {
+	display: none;
+}
 
 
 

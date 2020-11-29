@@ -6,7 +6,7 @@ block content
       .card-header.text-center
         strong Create Exercise
       .card-body
-        form#myform(action="/class/" + classroom._id + "/exercise/create", method="POST", name="myform")
+        form#myform(action="/class/" + classroom._id + "/exercise/create", method="POST", name="myform" enctype="multipart/form-data")
           .row
             .col-sm-6
               .form-group
@@ -32,9 +32,13 @@ block content
               .form-group
                 label(for="timebegin") Time end
                 input#timebegin.form-control(type="time", name="timeend") 
-              
-          .text-center
-            button#btnsubmit.btn.btn-custom Publish
+              .form-group
+                label(for="file") PDF
+                input#file(type="file", name="pdf")
+      .card-footer.text-center
+        a.btn.btn-secondary.mr-5(href="/class/" + classroom._id + "/exercise") Back to list
+        button#btnsubmit.btn.btn-primary Create
+        
                       
 
 block js

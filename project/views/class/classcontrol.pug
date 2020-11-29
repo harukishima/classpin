@@ -1,10 +1,11 @@
 doctype html
 head
-  title ClassPin
+  title CLASSPIN | CLASS OF THE FUTURE
   link(rel="preconnect" href="https://fonts.gstatic.com")
   link(href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,900&display=swap" rel="stylesheet")
   link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
   link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css')
+  link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous')
   link#bootstrap-css(href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.css', rel='stylesheet')
   link(rel="stylesheet", href="/css/sidebar.css")
 .wrapper
@@ -14,6 +15,11 @@ head
       p.text-white #{teacher.name}
       span ID: #{classroom.joinId}
     ul.lisst-unstyled.components
+      li
+        if (Active == "overview")
+          a.active(href='/class/' + classroom._id) Overview
+        else
+          a(href='/class/' + classroom._id) Overview
       li
         if (Active == "exercise")
           a.active(href='/class/' + classroom._id + '/exercise') Exercise
@@ -38,17 +44,17 @@ head
       a.btn.btn-danger.p-2(href="/class/delete/" + classroom._id) 
         i.far.fa-trash-alt
         |   Delete class
-  #content
-    nav.navbar.navbar-expand-lg.navbar-light(style="background-color: #fafafa;")
-      .container-fluid(style="background-color: #fafafa;")
-        button#sidebarCollapse.btn.btn-info(type='button')
-          i.fas.fa-align-left
-        a.btn.btn-info(href="/class") Return to dashboard
-    br
-    br
-    block content
+  .scrollable
+    #content
+      nav.navbar.navbar-expand-lg.navbar-light(style="background-color: #fafafa;")
+        .container-fluid(style="background-color: #fafafa;")
+          button#sidebarCollapse.btn.btn-info(type='button')
+            i.fas.fa-align-left
+          a.btn.btn-info(href="/class") Return to dashboard
+      br
+      block content
     
-script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin='anonymous')
+script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
 script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', integrity='sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1', crossorigin='anonymous')
 script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM', crossorigin='anonymous')
 script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js')

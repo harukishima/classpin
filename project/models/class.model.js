@@ -5,6 +5,7 @@ const Classschema = new Schema({
   _id: mongoose.ObjectId,
   classname: String,
   listusers: Array,
+  listExam: Array,
   teacher: mongoose.ObjectId,
   subject: String,
   joinId: String,

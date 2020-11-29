@@ -178,43 +178,29 @@ module.exports.postDelete = async (req, res) => {
 
 module.exports.allMembers = async (req, res) => {
   const classId = req.params.id;
-  console.log(classId);
-  const matchedClass = await Classroom.findById({_id: classId});
-  const allMembers = await User.find({_id: {$in : matchedClass.listusers}});
-  const teacher = await User.findById({_id: matchedClass.teacher});
-  console.log(allMembers);
+  //console.log(classId);
+  const allMembers = await User.find({_id: {$in : res.locals.classroom.listusers}});
+  //console.log(allMembers);
   res.render('class/allMembers', {
     allMembers : allMembers,
-    classroom : matchedClass,
-    teacher: teacher
   });
 }
 
 module.exports.exercise = async (req, res) => {
-  const classId = req.params.id;
-  console.log(classId);
-  const matchedClass = await Classroom.findById({_id: classId});
-  
-  const teacher = await User.findById({_id: matchedClass.teacher});
+  const classroom = res.locals.classroom;
+  const allExercise = await Exercise.find({_id: {$in : classroom.listExam}}).sort({dateCreated: -1});
   res.render('class/exercise', {
-    classroom : matchedClass,
-    teacher : teacher,
+    allExercise : allExercise,
   });
 }
 
 module.exports.createExercise = async (req, res) => {
   const classId = req.params.id;
-  console.log(classId);
-  const matchedClass = await Classroom.findById({_id: classId});
-  const teacher = await User.findById({_id: matchedClass.teacher});
-  res.render('class/formCreateExercise', {
-    classroom : matchedClass,
-    teacher : teacher,
-  })
+  res.render('class/formCreateExercise');
 }
 
 module.exports.postCreateEx = async (req, res) => {
-  console.log(req.body);
+  //console.log(req.body);
   const dateBegin = req.body.datebegin + " " + req.body.timebegin;
   const dateEnd = req.body.dateend + " " + req.body.timeend;
   const newExercise = new Exercise();
@@ -222,13 +208,15 @@ module.exports.postCreateEx = async (req, res) => {
   newExercise.title = req.body.title;
   newExercise.description = req.body.description;
   newExercise.dateBegin = new Date(dateBegin);
-  console.log(newExercise.dateBegin);
+  //console.log(newExercise.dateBegin);
   newExercise.dateEnd = new Date(dateEnd);
   newExercise.time = req.body.time;
-  newExercise.save(function(err) {
-    if(err) {
-      console.log(err);
-    }
-    //saved
-  })
+  if(req.file) {
+    newExercise.examFile = req.file.path.split('\\').slice(1).join('\\');
+  }
+  newExercise.status = "pending";
+  await newExercise.save();
+  // Them de thi vao lop hoc
+  await Classroom.updateOne({_id: req.params.id}, {$addToSet : {listExam : newExercise._id}});
+  res.redirect('/class/' + req.params.id + '/exercise');
 }

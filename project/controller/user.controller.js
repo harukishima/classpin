@@ -25,7 +25,9 @@ module.exports.postUpdateProfile = async (req, res) => {
     user.name = name;
     user.phone = phone;
     user.email = email;
-    user.avatar = '/' + req.file.path.split("\\").slice(1).join('/');  
+    if(req.file) {
+      user.avatar = '/' + req.file.path.split("\\").slice(1).join('/'); 
+    }
     await user.save();
     var string = encodeURIComponent("success");
     res.redirect('/users/' + user._id + '/?valid=' + string);
