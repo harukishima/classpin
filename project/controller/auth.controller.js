@@ -2,6 +2,9 @@ const User = require("../models/users.model");
 const bcrypt = require('bcrypt');
 
 module.exports.login = (req, res) => {
+  if(req.signedCookies.userId) {
+    res.redirect('/');
+  }
   res.render('auth/login', {});
 }
 

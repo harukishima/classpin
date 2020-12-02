@@ -29,11 +29,7 @@ module.exports = {
             {
               resources: '/class',
               permissions: '*',
-            },
-            {
-              resources: '/users',
-              permissions: '*',
-            },
+            }
           ]
         },
       ]);

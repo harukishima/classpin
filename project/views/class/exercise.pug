@@ -27,16 +27,47 @@ block content
               each exercise in pendingExercise
                 .card.mb-3
                   .card-header.d-flex.justify-content-between.flip
+                    .title
+                      h5.card-title #{exercise.title}
+                      h6.font-weight-light  #{exercise.date.fromNow()}
+                    .pencil
+                      a.btn.btn-primary(href="#")
+                        i.fas.fa-pencil-alt
+                  .card-body.panel
+                    p.card-text Description: #{exercise.description}
+                    p.card-text Date begin: #{exercise.dateBegin.toUTCString()}
+                    p.card-text Date end: #{exercise.dateEnd.toUTCString()}
+                    form(id="myForm", action="/class/" + classroom._id + "/exercise/" + exercise._id + "/publish", method="POST")
+                      input(type="hidden", value="submit", name="q")
+                    input.btn.btn-primary.mr-2(type="submit", form="myForm", value="Publish")
+                    if(exercise.examFile)
+                      a.btn.btn-outline-danger.mr-2(href="/class/" + classroom._id + "/exercise/" + exercise._id + "/fileExam") PDF document
+                    a.btn.btn-outline-success(href="/class/" + classroom._id + "/exercise/" + exercise._id) Question
+                    
+            else
+              .text-center
+                p No exercises have been added.
+            hr.mb-4
+            h4.bold
+              i.fas.fa-list.mr-2
+              | Waiting exercises
+            hr.mb-4
+            if(waitingExercise.length)
+              each exercise in waitingExercise
+                .card.mb-3
+                  .card-header.d-flex.justify-content-between.flip
                     h5.card-title #{exercise.title}
                     .pencil
                       a.btn.btn-primary(href="/class/" + classroom._id + "/exercise/" + exercise._id)
                         i.fas.fa-pencil-alt
                   .card-body.panel
+                    p.card-text Description: #{exercise.description}
+                    p.card-text Date begin: #{exercise.dateBegin.toUTCString()}
+                    p.card-text Date end: #{exercise.dateEnd.toUTCString()}
                     p.card-text #{exercise.description}
-                    a.btn.btn-primary(href="#") Publish
             else
               .text-center
-                p No exercises have been added.
+                p No exercises in waiting list.
             hr.mb-4
             h4.bold
               i.fas.fa-list.mr-2
@@ -51,14 +82,25 @@ block content
                       a.btn.btn-primary(href="/class/" + classroom._id + "/exercise/" + exercise._id)
                         i.fas.fa-pencil-alt
                   .card-body.panel
+                    p.card-text Description: #{exercise.description}
+                    p.card-text Date begin: #{exercise.dateBegin.toUTCString()}
+                    p.card-text Date end: #{exercise.dateEnd.toUTCString()}
                     p.card-text #{exercise.description}
             else
               .text-center
                 p No exercises have been published.
 block js
   script.
+
     $(document).ready(function() {
       $('.flip').click(function(){
         $(this).parent().children('.panel').slideToggle("slow");
       });
     });
+
+    //- function myFunction(event) {
+    //-   event.preventDefault();
+    //- }
+
+   
+    

@@ -1,0 +1,29 @@
+extends ./classcontrol 
+
+block content 
+  .container.p-5
+    .card
+      .card-header
+        span Create multiple choice questions
+      .card-body
+        form#myForm(method="POST", onsubmit="return myFunction(event);", name="myform" action="/class/" + classroom._id + "/exercise/" + exercise._id + "/postCreateQuestion")
+          - for (var i=1; i<= numberOfQuestions; i++) {
+            .form-group
+              label.mr-2(for="question" + i) Question #{i}
+              input(type="text", name="correct" placeholder="Correct answer(A,B,C,D)")
+          - }
+      .card-footer
+        button#btnSubmit Submit
+
+block js
+  script.
+
+    var btnSubmit = document.getElementById('btnSubmit');
+
+    btnSubmit.addEventListener('click', function() {
+      document.myform.submit();
+    })
+
+    function myFunction(event) {
+      event.preventDefault();
+    }

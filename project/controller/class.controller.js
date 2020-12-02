@@ -1,12 +1,20 @@
 const Classroom = require('../models/class.model');
 const User = require('../models/users.model');
 const Exercise = require('../models/Exercise.model');
+const Question = require('../models/question.model');
+const Choice = require('../models/choice.model');
 const mongoose = require('mongoose');
 const shortid = require('shortid');
+var moment = require('moment'); // require
 
 module.exports.index = async (req, res) => {
   var passedVariable = req.query.status;
+  // Tim lop hoc cua user
+  var objectId = mongoose.Types.ObjectId(req.signedCookies.userId);
   const allclass = await Classroom.aggregate([
+    {
+      $match: {listusers: {$all : [objectId]}}
+    },
     {
       $lookup:
         {
@@ -57,11 +65,18 @@ module.exports.postCreate = async (req, res) => {
 };
 
 module.exports.classControl = async (req, res) => {
+  var passedVariable = req.query.enroll;
   const classroom = await Classroom.findById({_id: req.params.id});
+  const userId = mongoose.Types.ObjectId(req.signedCookies.userId);
+  if(classroom.listusers.indexOf(userId) === -1) {
+    var string = encodeURIComponent("noPermission");
+    res.redirect('/class/' + '?status=' + string);
+  }
   const teacher = await User.findById({_id: classroom.teacher});
   res.render('class/classcontrol', {
     classroom: classroom,
-    teacher: teacher
+    teacher: teacher,
+    passedVariable: passedVariable,
   });
 };
 
@@ -134,7 +149,8 @@ module.exports.postEnrollClass = async (req, res) => {
       }
       console.log("Success!");
     })
-    res.redirect('/class/' + matchedClass._id);
+    var string = encodeURIComponent('success');
+    res.redirect('/class/' + matchedClass._id + '/?enroll=' + string);
   } catch (error) {
     console.log(error);
   }
@@ -189,9 +205,15 @@ module.exports.allMembers = async (req, res) => {
 module.exports.exercise = async (req, res) => {
   const classroom = res.locals.classroom;
   const pendingExercise = await Exercise.find({_id: {$in : classroom.listExam}, status : 'pending'}).sort({dateCreated: -1});
-  const publishedExercise = await Exercise.find({_id: {$in : classroom.listExam}, status : 'published'}).sort({dateCreated: -1});
+  const publishedExercise = await Exercise.find({_id: {$in : classroom.listExam}, status : 'published', dateBegin: {$lt: Date.now()}}).sort({dateBegin: -1});
+  const waitingExercise = await Exercise.find({_id: {$in: classroom.listExam}, status: 'published', dateBegin : {$gt: Date.now()}}).sort({dateBegin: -1});;
+  for(var i of pendingExercise) {
+    i.date = moment(i.dateCreated);
+    //console.log(i.date.fromNow());
+  }
   res.render('class/exercise', {
     pendingExercise : pendingExercise,
+    waitingExercise : waitingExercise,
     publishedExercise : publishedExercise
   });
 }
@@ -212,6 +234,7 @@ module.exports.postCreateEx = async (req, res) => {
   newExercise.dateBegin = new Date(dateBegin);
   //console.log(newExercise.dateBegin);
   newExercise.dateEnd = new Date(dateEnd);
+  newExercise.dateCreated = Date.now();
   newExercise.time = req.body.time;
   if(req.file) {
     newExercise.examFile = req.file.path.split('\\').slice(1).join('\\');
@@ -223,11 +246,70 @@ module.exports.postCreateEx = async (req, res) => {
   res.redirect('/class/' + req.params.id + '/exercise');
 }
 
-module.exports.updateExercise = async (req, res) => {
+module.exports.allQuestion = async (req, res) => {
   const exerciseId = req.params.idex;
   const exercise = await Exercise.findById({_id: exerciseId});
-
-  res.render('class/updateExercise', {
-    exercise : exercise
+  const questions = await Question.find({_id: {$in : exercise.listQuestion}});
+  res.render('class/question', {
+    exercise : exercise,
+    questions: questions
   });
+}
+
+module.exports.reviewPDF = async (req, res) => {
+  const exercise = await Exercise.findById({_id: req.params.idex});
+  console.log(exercise.examFile);
+  res.render('class/PDF', {
+    path : exercise.examFile,
+  });
+}
+
+// render all questions
+module.exports.addQuestion = async (req, res) => {
+  const exercise = await Exercise.findById({_id: req.params.idex});
+  //const questions = await Question.find({_id: {$in: exercise.listQuestion}});
+  res.render('class/addQuestion', {
+    exercise : exercise,
+    //questions: questions
+  });
+}
+
+module.exports.postNumberQuestion = async (req, res) => {
+  console.log(+req.body.numberOfChoices);
+  await Exercise.updateOne({_id: req.params.idex}, {$set: {numberOfQuestions: +req.body.numberOfQuestions, numberOfChoices: +req.body.numberOfChoices}});
+
+  const exercise = await Exercise.findById({_id: req.params.idex});
+  res.render('class/formCreateQuestion', {
+    numberOfQuestions: +req.body.numberOfQuestions,
+    exercise: exercise
+  });
+}
+
+
+module.exports.postCreateQuestion = async (req, res) => {
+  console.log(req.body);
+  const exercise = await Exercise.findById({_id: req.params.idex});
+
+  var listQuestion = [];
+  var listIdQuestion = [];
+  for(var i=1; i<= exercise.numberOfQuestions; i++) {
+    const question = new Question();
+    question._id = mongoose.Types.ObjectId();
+    question.correctAnswer = req.body.correct[i-1];
+    question.index = i;
+    listQuestion.push(question);
+    listIdQuestion.push(question._id);
+  }
+  console.log(listQuestion);
+  await Question.insertMany(listQuestion);
+  await Exercise.updateOne({_id: req.params.idex}, {$set: {listQuestion: listIdQuestion}});
+  res.redirect('/class/' + res.locals.classroom._id + '/exercise/' + exercise._id);
+}
+
+module.exports.publishEx = async (req, res) => {
+  console.log(req.body);
+  if(req.body.q === "submit") {
+    await Exercise.updateOne({_id: req.params.idex}, {$set: {status: "published"}});
+  }
+  res.redirect('/class/' + res.locals.classroom._id + '/exercise/');
 }

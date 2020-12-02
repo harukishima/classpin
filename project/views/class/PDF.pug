@@ -1,0 +1,25 @@
+extends ./classcontrol 
+
+block head
+  style.
+    .container{
+    padding: 30px;
+    }
+
+block content
+  .container.pl-5.pr-5
+    embed(src="/" + path, type='application/pdf', width='100%', height='700px')
+
+
+
+
+//- head
+//-   meta(charset='UTF-8')
+//-   meta(name='viewport', content='width=device-width, initial-scale=1.0')
+//-   title pdf
+//-   style.
+//-     .container{
+//-     padding: 30px;
+//-     }
+//- .container
+//-   embed(src="/" + path, type='application/pdf', width='100%', height='700px')

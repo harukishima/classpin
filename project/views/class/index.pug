@@ -36,10 +36,18 @@ block content
 block js
   script.
     var msg = document.getElementById('msg');
+    var status = "#{msg}";
+    console.log(status);
     if(msg.textContent === "success") {
       Swal.fire('Deleted successfully!', '', 'success');
     } else if (msg.textContent === "createsuccess") {
       Swal.fire('Create class successfully!', '', 'success');
+    } else if (status === "noPermission") {
+      Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'You do not have permission to access this class!',
+    })
     }
     else {
       Swal.fire('Sorry, an error has occurred !', '', 'info');

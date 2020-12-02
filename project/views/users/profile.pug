@@ -14,8 +14,10 @@ block content
               li
                 strong= matchedUser.name
               li= matchedUser.phone
-              li= matchedUser.email
-            a.ml-4.btn.btn-outline-info(href="/users/updateprofile/"+ matchedUser.id) Update Profile
+              if(auth)
+                li= matchedUser.email
+            if(auth)
+              a.ml-4.btn.btn-outline-info(href="/users/updateprofile/"+ matchedUser.id) Update Profile
         else
           p No information.
       if(passedVariable)

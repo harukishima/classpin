@@ -1,0 +1,19 @@
+extends ./classcontrol 
+
+block content
+  .container.p-5
+    .card
+      .card-header
+        h5 Add question
+      .card-body
+        form(method="POST")
+          .form-group
+            label(for="number") Input the number of questions
+            input#number.form-control(type="number", name="numberOfQuestions")
+          button.btn.btn-primary Next
+      .card-footer
+block js
+
+    
+
+    

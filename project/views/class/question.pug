@@ -1,0 +1,31 @@
+extends ./classcontrol 
+
+block content
+  .container.p-5
+    h2.mb-2.text-white Exercise: #{exercise.title}
+    h3.mb-3.text-white Questions
+    .card.shadow(style="min-height: 300px;")
+      .card-body.text-center
+        a.btn.btn-custom.mt-3.bg-secondary.text-white.mr-4(href="/class/" + classroom._id + "/exercise")
+          i.fas.fa-backward.mr-2
+          | Back to exercises
+        a.btn.btn-custom.mt-3(href="/class/" + classroom._id + "/exercise/" + exercise._id + "/addquestion")
+          i.fas.fa-plus.mr-2
+          | Add question
+        each question, index in questions
+          .card.mb-3.mt-4
+            .card-header.d-flex.justify-content-between.flip
+              h5.card-title Question #{index + 1}
+              .pencil
+                a.btn.btn-primary(href="#")
+                  i.fas.fa-pencil-alt
+            .card-body.panel.text-left
+              p.card-text #{question.description}
+              p.cart-text Correct answer: #{question.correctAnswer}
+block js
+  script.
+    $(document).ready(function() {
+      $('.flip').click(function(){
+        $(this).parent().children('.panel').slideToggle("slow");
+      });
+    });

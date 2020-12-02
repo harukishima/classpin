@@ -13,6 +13,7 @@ const schema = new Schema({
   dateEnd: Date,
   time: Number,
   status: String,
+  numberOfQuestions: Number,
 });
 
 
