@@ -323,11 +323,26 @@ module.exports.publishEx = async (req, res) => {
 }
 
 
+//controller student
+
 module.exports.studentClass = async (req, res) => {
-  const classroom = await Classroom.findById({_id: req.params.id});
-  const teacher = await User.findById({_id: classroom.teacher});
   res.render('class/studentcontrol', {
-    classroom : classroom,
-    teacher: teacher
   })
+}
+
+module.exports.studentAllExercise = async (req, res) => {
+  const allExercises = await Exercise.find({_id: {$in : res.locals.classroom.listExam}, status: "published"}).sort({dateCreated: -1});
+  res.render('class/studentExercise', {
+    allExercises : allExercises
+  })
+}
+
+module.exports.allStudentMembers = async (req, res) => {
+  const classId = req.params.id;
+  //console.log(classId);
+  const allMembers = await User.find({_id: {$in : res.locals.classroom.listusers}});
+  //console.log(allMembers);
+  res.render('class/allStudentMembers', {
+    allMembers : allMembers,
+  });
 }

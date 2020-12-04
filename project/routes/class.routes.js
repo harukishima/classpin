@@ -8,8 +8,9 @@ const memberActive = require('../middleware/memberActive.middleware');
 const notifyActive = require('../middleware/notifyActive.middleware');
 const documentActive = require('../middleware/documentActive.middleware');
 const overviewActive = require('../middleware/overviewActive.middleware');
-const localsClassTeacher = require('../middleware/localClassTeacher.middleware');
-
+// const localsClassTeacher = require('../middleware/localClassTeacher.middleware');
+const teacherMiddleware = require('../middleware/requireTeacher.middleware');
+const studentMiddleware = require('../middleware/requireStudent.middleware');
 
 // Chỉ định vị trí lưu file vào ext
 var storage = multer.diskStorage({
@@ -24,26 +25,34 @@ var storage = multer.diskStorage({
 var upload = multer({storage: storage});
 
 router.get('/', controller.index);
+
 router.get('/create', controller.create);
-router.get('/enroll', controller.enroll);
 router.post('/create', controller.postCreate);
+
+router.get('/enroll', controller.enroll);
+router.post('/enroll', controller.postEnrollClass);
+
 router.get('/search', controller.search);
 router.get('/:id', overviewActive.localsActive, controller.classControl);
-router.post('/enroll', controller.postEnrollClass);
-router.get('/delete/:id', controller.getDelete);
-router.post('/delete/:id', controller.postDelete);
-router.get('/:id/members', memberActive.localsActive, localsClassTeacher.localsClassTeacher, controller.allMembers);
-router.get('/:id/exercise', exerciseActive.localsActive, localsClassTeacher.localsClassTeacher, controller.exercise);
-router.get('/:id/exercise/create', exerciseActive.localsActive, localsClassTeacher.localsClassTeacher, controller.createExercise);
-router.post('/:id/exercise/create', exerciseActive.localsActive, upload.single('pdf') , controller.postCreateEx);
-router.get('/:id/exercise/:idex', exerciseActive.localsActive, localsClassTeacher.localsClassTeacher, controller.allQuestion);
-router.get('/:id/exercise/:idex/fileExam', exerciseActive.localsActive, localsClassTeacher.localsClassTeacher, controller.reviewPDF);
-router.get('/:id/exercise/:idex/addQuestion', exerciseActive.localsActive, localsClassTeacher.localsClassTeacher, controller.addQuestion);
-router.post('/:id/exercise/:idex/addQuestion', exerciseActive.localsActive, localsClassTeacher.localsClassTeacher, controller.postNumberQuestion);
-router.post('/:id/exercise/:idex/postCreateQuestion', exerciseActive.localsActive, localsClassTeacher.localsClassTeacher, controller.postCreateQuestion);
-router.post('/:id/exercise/:idex/publish', exerciseActive.localsActive, localsClassTeacher.localsClassTeacher, controller.publishEx);
+
+router.get('/delete/:id', teacherMiddleware.requireTeacher, controller.getDelete);
+router.post('/delete/:id',teacherMiddleware.requireTeacher, controller.postDelete);
+
+router.get('/:id/members',teacherMiddleware.requireTeacher, memberActive.localsActive, controller.allMembers);
+router.get('/:id/exercise', teacherMiddleware.requireTeacher, exerciseActive.localsActive, controller.exercise);
+router.get('/:id/exercise/create', teacherMiddleware.requireTeacher, exerciseActive.localsActive, controller.createExercise);
+router.post('/:id/exercise/create', teacherMiddleware.requireTeacher, exerciseActive.localsActive, upload.single('pdf') , controller.postCreateEx);
+router.get('/:id/exercise/:idex', teacherMiddleware.requireTeacher, exerciseActive.localsActive, controller.allQuestion);
+router.get('/:id/exercise/:idex/fileExam', teacherMiddleware.requireTeacher, exerciseActive.localsActive, controller.reviewPDF);
+router.get('/:id/exercise/:idex/addQuestion', teacherMiddleware.requireTeacher, exerciseActive.localsActive, controller.addQuestion);
+router.post('/:id/exercise/:idex/addQuestion',teacherMiddleware.requireTeacher, exerciseActive.localsActive, controller.postNumberQuestion);
+router.post('/:id/exercise/:idex/postCreateQuestion', teacherMiddleware.requireTeacher, exerciseActive.localsActive, controller.postCreateQuestion);
+router.post('/:id/exercise/:idex/publish', teacherMiddleware.requireTeacher, exerciseActive.localsActive, controller.publishEx);
 
 // router student
-router.get('/:id/student', overviewActive.localsActive, controller.studentClass);
+router.get('/:id/student', studentMiddleware.requireStudent, overviewActive.localsActive, controller.studentClass);
+router.get('/:id/student/exercise', studentMiddleware.requireStudent, exerciseActive.localsActive, controller.studentAllExercise);
+router.get('/:id/student/members', studentMiddleware.requireStudent, memberActive.localsActive, controller.allStudentMembers);
+
 
 module.exports = router;
