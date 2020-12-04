@@ -1,14 +1,16 @@
-nav.navbar.navbar-expand-lg.navbar-light.text-white(style="z-index: 100; position: fixed; width: 100%; top: 0; left: 0; height: 10vh;")
-      a.navbar-brand.ml-5.text-white(href='/') ClassPin
+nav.navbar.navbar-expand-lg.navbar-light.text-white(style=" position: fixed; width: 100%; top: 0; left: 0; height: 10vh;")
+      #logo-box
+        a(href="/")
+          img#logo(src="/images/logo.svg", alt="logo")
       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNavAltMarkup', aria-controls='navbarNavAltMarkup', aria-expanded='false', aria-label='Toggle navigation')
         span.navbar-toggler-icon
-      #navbarNavAltMarkup.collapse.navbar-collapse.text-center
-        .navbar-nav.ml-0
+      #navbarNavAltMarkup.collapse.navbar-collapse
+        .navbar-nav.ml-0.mx-auto
           a.text-white.nav-link.active(href='/')
             | Home
             span.sr-only (current)
           a.text-white.nav-link(href='/class') Dashboard
-        .dropdown.ml-auto.mr-4
+        .dropdown.ml-0#dropdow-avatar
           if (user)
             a#triggerId.btn.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
               span.mr-3.d-none.d-lg-inline.text-secondary-600 #{user.name}

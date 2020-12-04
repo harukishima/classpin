@@ -1,23 +1,32 @@
 extends ../layout/common
 
+block head
+  link(rel="stylesheet", href="/css/profile.css")
 
 block content
-  .block(style="height: 75vh; margin-top: 7rem;")
-    .container.mt-3
-      h1.ml-5.mb-5 Profile
-      .d-flex.content--m
+  .block(style="min-height: 100vh; margin-top: 9rem;")
+    .container.info
+      .heading-profile
+        h1.mb-5.heading-main Profile
+      .profile
         if(matchedUser)
-          .item
+          .item-avatar
             img(src= matchedUser.avatar ? matchedUser.avatar : "/images/unnamed.png", alt="avatar", style="width: 200px; height: 200px; border-radius: 100px;")
           .item.pt-5.pl-3
             ul
               li
-                strong= matchedUser.name
-              li= matchedUser.phone
+                strong.mr-2 Fullname:   
+                span #{matchedUser.name}
+              li 
+                strong.mr-2 Phone:   
+                span #{matchedUser.phone}
               if(auth)
-                li= matchedUser.email
+                li 
+                  strong.mr-2 Email:   
+                  span #{matchedUser.email}
             if(auth)
-              a.ml-4.btn.btn-outline-info(href="/users/updateprofile/"+ matchedUser.id) Update Profile
+              .cta-link
+                a.btn.btn-outline-info(href="/users/updateprofile/"+ matchedUser.id) Update Profile
         else
           p No information.
       if(passedVariable)

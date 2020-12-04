@@ -9,19 +9,20 @@ block content
       if(msg)
         p#msg(style="visibility: hidden;") #{msg}
       h1 Your class
-      .btn-group.ml-5
-        button.btn.btn-primary.dropdown-toggle.dropdown-toggle-split(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
-          i.fas.fa-plus
-          span.sr-only Toggle Dropdown     
-        .dropdown-menu
-          a.dropdown-item(href='/class/create') Create a class
-          a.dropdown-item(href='/class/enroll') Enroll a class
-      form.mt-3.ml-5.d-inline-block(action="/class/search", method="GET", name="myform")
-        .input-group
-          input.form-control.bg-light.border-0.small(type='text', placeholder='Search for a class...',  name="q", size="30", value= value? value: "", aria-label='Search', aria-describedby='basic-addon2')
-          .input-group-append
-            button#btnsubmit.btn.btn-primary(type='button')
-              i.fas.fa-search.fa-sm
+      .group.ml-5.mt-3
+        a.btn.btn-success.mr-4(href='/class/create') 
+          i.fas.fa-plus.mr-2
+          | Create
+        a.btn.btn-primary.mr-4(href='/class/enroll')
+          i.fas.fa-sign-in-alt.mr-2
+          | Enroll
+        .form
+          form.mt-3(action="/class/search", method="GET", name="myform")
+            .input-group
+              input.form-control.bg-light.border-0.small(type='text', placeholder='Search for a class...',  name="q", size="40", value= value? value: "", aria-label='Search', aria-describedby='basic-addon2')
+              .input-group-append
+                button#btnsubmit.btn.btn-primary(type='button')
+                  i.fas.fa-search.fa-sm
       hr
       .d-flex.justify-content-start.flex-wrap
         each a in allClass

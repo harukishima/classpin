@@ -1,0 +1,15 @@
+xây dựng trang web quản lí lớp học
+actors la Teacher, Student, Class, Superuser, Question, Choice
+Các chức năng dự định:
++ Đăng nhập/ Đăng kí tài khoản
++ trang thông tin cá nhân, thêm xóa sửa thông tin
++ join vào lớp học bằng id lớp học
++ Giáo viên đăng đề thi pdf và tạo câu hỏi trắc nghiệm ()
++ tự động lưu bài thi và chấm điểm (Hệ thống)
++ gởi email thông báo trong lớp học (hệ thống)
++ Xáo đề thi (hệ thống)
++ thống kê điểm số từng sinh viên trong lớp học (teacher)
++ Thêm/xóa/ student của lớp học (teacher)
++ Thêm/xóa lớp học (teacher)
++ hiển thị biểu đồ % các đáp án được chọn của từng câu (teacher and student)
+

@@ -68,16 +68,24 @@ module.exports.classControl = async (req, res) => {
   var passedVariable = req.query.enroll;
   const classroom = await Classroom.findById({_id: req.params.id});
   const userId = mongoose.Types.ObjectId(req.signedCookies.userId);
+  
   if(classroom.listusers.indexOf(userId) === -1) {
     var string = encodeURIComponent("noPermission");
     res.redirect('/class/' + '?status=' + string);
   }
+  
   const teacher = await User.findById({_id: classroom.teacher});
-  res.render('class/classcontrol', {
-    classroom: classroom,
-    teacher: teacher,
-    passedVariable: passedVariable,
-  });
+  console.log(userId);
+  console.log(teacher);
+  if(teacher._id.toString() === userId.toString()) {
+    res.render('class/classcontrol', {
+      classroom: classroom,
+      teacher: teacher,
+      passedVariable: passedVariable,
+    });
+  } else {
+    res.redirect('/class/' + classroom._id + '/student')
+  }
 };
 
 module.exports.search = async (req, res) => {
@@ -312,4 +320,14 @@ module.exports.publishEx = async (req, res) => {
     await Exercise.updateOne({_id: req.params.idex}, {$set: {status: "published"}});
   }
   res.redirect('/class/' + res.locals.classroom._id + '/exercise/');
+}
+
+
+module.exports.studentClass = async (req, res) => {
+  const classroom = await Classroom.findById({_id: req.params.id});
+  const teacher = await User.findById({_id: classroom.teacher});
+  res.render('class/studentcontrol', {
+    classroom : classroom,
+    teacher: teacher
+  })
 }

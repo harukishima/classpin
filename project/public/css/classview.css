@@ -2,3 +2,13 @@ body {
   font-family: "Poppins", sans-serif;
   background-color:#F6F7F9 !important;
 }
+
+.group{
+  width: 100%;
+}
+
+.form{
+  margin-right: 0 auto;
+  display: inline-block;
+
+}

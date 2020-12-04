@@ -1,3 +1,45 @@
 h1 {
   color: red;
 }
+
+.info{
+  margin-top: 50px;
+}
+
+.profile{
+  margin-top: 30px;
+  display: flex;
+}
+
+.btn-outline-info{
+  margin-left: 20px;
+}
+
+.heading-main {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+@media (max-width: 1200px){
+  
+}
+
+@media (max-width: 480px) {
+  .heading-profile{
+    text-align: center;
+  }
+  .profile{
+    display: block;
+  }
+  .item-avatar{
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .cta-link{
+    text-align: center;
+    margin-left: 0;
+  }
+  .btn-outline-info{
+    margin-left: 0px;
+  }
+}

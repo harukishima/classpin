@@ -43,4 +43,7 @@ router.post('/:id/exercise/:idex/addQuestion', exerciseActive.localsActive, loca
 router.post('/:id/exercise/:idex/postCreateQuestion', exerciseActive.localsActive, localsClassTeacher.localsClassTeacher, controller.postCreateQuestion);
 router.post('/:id/exercise/:idex/publish', exerciseActive.localsActive, localsClassTeacher.localsClassTeacher, controller.publishEx);
 
+// router student
+router.get('/:id/student', overviewActive.localsActive, controller.studentClass);
+
 module.exports = router;

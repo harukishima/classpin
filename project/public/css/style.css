@@ -38,11 +38,20 @@ body {
 }
 
 nav{
-  margin-top: 20px;
+  margin-top: 30px;
   position: static !important;
   font-family: "Poppins", sans-serif;
   font-size: 20px;
   
+}
+
+#logo-box{
+  display: inline;
+  margin-left: 100px;
+}
+
+#navbarNavAltMarkup{
+  text-align: center;
 }
 
 header{
@@ -64,39 +73,39 @@ header{
 }
 
 .logo{
-    height: 70px;
+  height: 70px;
 } 
 
 .logo-box{
-    position: absolute;
-    top: 30px;
-    left: 30px;
+  position: absolute;
+  top: 30px;
+  left: 30px;
 } 
 
 .heading-primary{
-    color: #fff;
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-    animation-name: moveInLeft;
-    animation-duration: 2s;
-    animation-delay: 3s;
-    animation-iteration-count: 2;
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  animation-name: moveInLeft;
+  animation-duration: 2s;
+  animation-delay: 3s;
+  animation-iteration-count: 2;
 }
 
 .heading-primary__main{
-    display: block;
-    font-size: 62px;
-    font-weight: 400;
-    letter-spacing: 15px;
-    margin-bottom: 1rem;
+  display: block;
+  font-size: 75px;
+  font-weight: 400;
+  letter-spacing: 15px;
+  margin-bottom: 1rem;
 }
 
 .heading-primary__sub{
-    text-align: center;
-    display: block;
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: 10px;
+  text-align: center;
+  display: block;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: 10px;
 }
 
 
@@ -207,4 +216,92 @@ header{
 
 .cta-links{
   margin-bottom: 2rem;
+}
+
+@media (max-width: 1200px) {
+  html{
+    font-size: 14px;
+  }
+  .custom-card{
+    font-size: 17px;
+    margin-right: 0;
+    transform: translate(13%, 0);
+  }
+  
+  .card-img{
+    height: 13rem;
+    width: 24rem;
+    margin-bottom: 1.5rem;
+  }
+  
+}
+
+@media (max-width: 1023px){
+  .text-box{
+    transform: translate(-5%, -125%);
+  }
+  .custom-card{
+    font-size: 20px;
+    margin-right: 0;
+    width: 65%;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+  }
+}
+
+@media (max-width: 767px){
+  .text-box{
+    transform: translate(-20%, -120%);
+  }
+  .heading-primary__main{
+    font-size: 40px;
+    
+  }
+  .heading-primary__sub{
+    font-size: 25px;
+  }
+  
+}
+
+@media (max-width: 570px) {
+  .text-box{
+    transform: translate(-24%, -135%);
+  }
+  .heading-primary__main{
+    font-size: 60px;
+    
+  }
+  .heading-primary__sub{
+    font-size: 16px;
+  }
+  .custom-card{
+    font-size: 20px;
+    margin-right: 0;
+    width: 85%;
+    top: 95%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+  }
+}
+
+@media (max-width: 480px) {
+  .text-box{
+    transform: translate(-26%, -115%);
+  }
+  .heading-primary__main{
+    font-size: 55px;
+  }
+  .heading-primary__sub{
+    font-size: 15px;
+  }
+  .heading-primary{
+    margin-bottom: 60px;
+  }
+  .custom-card{
+    height: 470px;
+  }
+  #logo-box{
+    margin-left: 10px;
+  }
 }
