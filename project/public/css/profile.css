@@ -20,6 +20,22 @@ h1 {
   margin-right: 30px;
 }
 
+.heading-secondary {
+  font-size: 2.7rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: inline-block;
+  letter-spacing: 0.5rem;
+  cursor: pointer;
+  background-image: linear-gradient(to right, #8e9efc, #1c3eff);
+  color: transparent;
+  margin-bottom: 2rem;
+  -webkit-background-clip: text;
+  transition: all .2s; }
+  .heading-secondary:hover {
+    transform: skewY(5deg) scale(1.1);
+    text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }
+
 @media (max-width: 1200px){
   
 }
@@ -36,6 +52,7 @@ h1 {
     margin-bottom: 20px;
   }
   .cta-link{
+    margin-top: 20px;
     text-align: center;
     margin-left: 0;
   }

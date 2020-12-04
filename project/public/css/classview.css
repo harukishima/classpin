@@ -4,11 +4,82 @@ body {
 }
 
 .group{
-  width: 100%;
+  margin-left: 30px;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.form{
-  margin-right: 0 auto;
+.heading-secondary {
+  font-size: 2.7rem;
+  text-transform: uppercase;
+  font-weight: 700;
   display: inline-block;
+  letter-spacing: 0.5rem;
+  cursor: pointer;
+  background-image: linear-gradient(to right, #8e9efc, #1c3eff);
+  color: transparent;
+  margin-bottom: 2rem;
+  -webkit-background-clip: text;
+  transition: all .2s; }
+  .heading-secondary:hover {
+    transform: skewY(5deg) scale(1.1);
+    text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }
 
+.button-group a{
+  margin-right: 30px;
+}
+
+.list-class{
+  gap: 30px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.flex-start {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.content{
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15;
+}
+
+
+@media (max-width: 1023px) {
+  .group {
+    display: inline-block;
+    width: 100%;
+    margin-left: 0;
+  }
+  .form{
+    display: inline-block;
+    width: 100%;
+  }
+  form{
+    display: inline-block;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px){
+  .heading-primary{
+    text-align: center;
+  }
+  .button-group{
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .button-group a{
+    margin-right: 0;
+  }
+  #btn-create {
+    margin-right: 10px;
+  }
 }

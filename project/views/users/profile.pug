@@ -7,11 +7,11 @@ block content
   .block(style="min-height: 100vh; margin-top: 9rem;")
     .container.info
       .heading-profile
-        h1.mb-5.heading-main Profile
+        h1.mb-5.heading-secondary Profile
       .profile
         if(matchedUser)
           .item-avatar
-            img(src= matchedUser.avatar ? matchedUser.avatar : "/images/unnamed.png", alt="avatar", style="width: 200px; height: 200px; border-radius: 100px;")
+            img(src= matchedUser.avatar ? matchedUser.avatar : "/images/unnamed.png", alt="avatar", style="width: 200px; height: 200px; border-radius: 100px; border: 1px solid blue;")
           .item.pt-5.pl-3
             ul
               li

@@ -4,18 +4,19 @@ block head
   link(rel="stylesheet", href="/css/classview.css")
 
 block content
-  .block(style="min-height: 90vh; margin-top: 7rem")
-    .container.mt-3
+  .block(style="min-height: 100vh; margin-top: 8rem")
+    .content.mt-3
       if(msg)
         p#msg(style="visibility: hidden;") #{msg}
-      h1 Your class
-      .group.ml-5.mt-3
-        a.btn.btn-success.mr-4(href='/class/create') 
-          i.fas.fa-plus.mr-2
-          | Create
-        a.btn.btn-primary.mr-4(href='/class/enroll')
-          i.fas.fa-sign-in-alt.mr-2
-          | Enroll
+      h1.heading-secondary Your class
+      .group
+        .button-group
+          a.btn.btn-success#btn-create(href='/class/create') 
+            i.fas.fa-plus.mr-2
+            | Create
+          a.btn.btn-primary(href='/class/enroll')
+            i.fas.fa-sign-in-alt.mr-2
+            | Enroll
         .form
           form.mt-3(action="/class/search", method="GET", name="myform")
             .input-group
@@ -24,15 +25,16 @@ block content
                 button#btnsubmit.btn.btn-primary(type='button')
                   i.fas.fa-search.fa-sm
       hr
-      .d-flex.justify-content-start.flex-wrap
-        each a in allClass
-          .card.bg-light.mb-5.ml-5(style='width: 18rem;')
-            .card-header
-              a.font-weight-bold(href="/class/" + a._id)= a.classname
-              h5.card-title= a.teacher_info[0].name
-            .card-body
-              p.card-text
-                span= a.description
+      .list-class.mb-5
+        .flex-start
+          each a in allClass
+            .card.bg-light(style='width: 18rem;')
+              .card-header
+                a.font-weight-bold(href="/class/" + a._id)= a.classname
+                h5.card-title= a.teacher_info[0].name
+              .card-body
+                p.card-text
+                  span= a.description
 
 block js
   script.
