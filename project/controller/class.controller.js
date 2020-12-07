@@ -83,8 +83,6 @@ module.exports.classControl = async (req, res) => {
       teacher: teacher,
       passedVariable: passedVariable,
     });
-  } else {
-    res.redirect('/class/' + classroom._id + '/student')
   }
 };
 
@@ -158,7 +156,7 @@ module.exports.postEnrollClass = async (req, res) => {
       console.log("Success!");
     })
     var string = encodeURIComponent('success');
-    res.redirect('/class/' + matchedClass._id + '/?enroll=' + string);
+    res.redirect('/class/' + matchedClass._id + '/student/?enroll=' + string);
   } catch (error) {
     console.log(error);
   }
@@ -326,7 +324,9 @@ module.exports.publishEx = async (req, res) => {
 //controller student
 
 module.exports.studentClass = async (req, res) => {
+  var passedVariable = req.query.enroll;
   res.render('class/studentcontrol', {
+    passedVariable: passedVariable
   })
 }
 

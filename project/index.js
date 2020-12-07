@@ -3,7 +3,7 @@ require('express-async-errors');
 var session = require('express-session');
 const express = require('express');
 const roles = require('./roles');
-const app = express();
+var app = express();
 const key = require('./config/main');
 const {port, mongo_URL, SECRET_SESSION} = key;
 var cookieParser = require('cookie-parser');
@@ -17,7 +17,6 @@ const authMiddleware = require('./middleware/login.middleware');
 const localsUserMiddleware = require('./middleware/localsUser.middleware');
 const adminRoutes = require('./routes/admin.routes.js');
 
-
 app.use(express.static('public'));
 app.set('view engine', 'pug');
 app.set('views', './views');
@@ -27,15 +26,18 @@ app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-
 app.use(cookieParser(SECRET_SESSION));
 
 app.use(session({
-    secret: 'secret-key',
-    resave: false,
-    saveUninitialized: false,
+  secret: 'secret-key',
+  resave: false,
+  saveUninitialized: false,
 }));
+
+
 
 // Connect to mongodb use callback function
 roles.connectMongodb(mongo_URL, initRoutes);
 
 function initRoutes(acl) {
+
   app.get('/info', authMiddleware.authRequire, (req, res) => {
     acl.allowedPermissions(req.session.userId, ['/class', '/guide', '/users'], (err, permission) => {
         res.json(permission);
@@ -48,9 +50,7 @@ function initRoutes(acl) {
     })
   });
   
-  app.get('/', localsUserMiddleware.localsUser, (req, res) => {
-    res.render('index');
-  });
+  
   
   app.get('/about', (req, res) => {
     throw new Error('ABOUT BROKEN');
@@ -70,21 +70,29 @@ function initRoutes(acl) {
   
   app.use('/guide', authMiddleware.authRequire, guideRoutes);
 
+  app.get('/', localsUserMiddleware.localsUser, (req, res) => {
+    res.render('index');
+  });
+
   app.use(function(req, res) {
     res.render('404');
-  })
+  });
 
     // default error handler
   app.use(function (err, req, res, next) {
     console.error(err.stack)
     res.render('500');
-  })
+  });
+
 }
 
+// connect to mongodb and then listening 
 app.listen(port, function() {
   console.log("Listening on port " + port);
 });
 
 
-
-
+module.exports = {
+  initRoutes,
+  app,
+}

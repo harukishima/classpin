@@ -37,7 +37,10 @@ block content
           each a in allClass
             .card.bg-light(style='width: 18rem;')
               .card-header
-                a.font-weight-bold(href="/class/" + a._id)= a.classname
+                if(a.teacher.toString() === user._id.toString())
+                  a.font-weight-bold(href="/class/" + a._id)= a.classname
+                else
+                  a.font-weight-bold(href='/class/' + a._id + '/student')= a.classname
                 h5.card-title= a.teacher_info[0].name
               .card-body
                 p.card-text
@@ -62,7 +65,4 @@ block js
     else {
       Swal.fire('Sorry, an error has occurred !', '', 'info');
     }
-    
-
-
-   
+ 

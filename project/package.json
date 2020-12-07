@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --inspect index",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --forceExit"
+  },
+  "jest" : {
+    "testEnvironment" : "node"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +27,11 @@
     "shortid": "^2.2.16"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.6",
+    "superagent": "^6.1.0",
+    "supertest": "^6.0.1"
   }
 }

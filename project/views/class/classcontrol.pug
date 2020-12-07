@@ -33,11 +33,11 @@ head
         if (Active == "exercise")
           a.active(href='/class/' + classroom._id + '/exercise') 
             i.fas.fa-book.mr-3
-            |   Exercise
+            |   Exercises
         else
           a(href='/class/' + classroom._id + '/exercise')
             i.fas.fa-book.mr-3
-            |   Exercise
+            |   Exercises
       li
         if (Active == "notify")
           a.active(href='#') 
@@ -95,20 +95,5 @@ script.
     });
   });
 
-  var enroll = "#{passedVariable}";
-  var classname = "#{classroom.classname}";
-  if(enroll === "success") {
-    Swal.fire({
-      title: 'Welcome to ' + classname,
-      width: 600,
-      padding: '3em',
-      background: '#fff url(https://sweetalert2.github.io/images/trees.png)',
-      backdrop: `
-        rgba(0,0,123,0.4)
-        url("https://sweetalert2.github.io/images/nyan-cat.gif")
-        left top
-        no-repeat
-      `
-    })
-  }
+  
 block js
