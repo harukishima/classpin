@@ -7,4 +7,6 @@ router.get('/', controller.index );
 
 router.post('/', controller.postSignup);
 
+router.get('/is-available', controller.isAvailable);
+
 module.exports = router;

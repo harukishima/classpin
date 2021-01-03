@@ -16,14 +16,16 @@ describe("Test the root path", () => {
   });
 });
 
-
-// kiem tra user chua dang nhap truy cap vao /class
-describe("Test the class path", () => {
+describe("Test login path", () => {
   test("It should response 200", async() => {
-    const response = await request(app).get("/class/");
-    expect(response.status).toBe(302); // redirect to login
+    const res = await request(app).get("/login");
+    expect(res.statusCode).toBe(200);
   })
-})
+});
+
+
+/// TEST LOGIN PAGE
+
 
 describe("Test login path", () => {
   test("It should response 200", async() => {
@@ -32,7 +34,18 @@ describe("Test login path", () => {
   })
 });
 
-// Dang nhap voi mat khau
+// Dang nhap voi password dung, mat khau sai
+describe("Test login with wrong username", () => {
+  test("It should render login page", async()=> {
+    const res = await request(app).post("/login").send({
+      namelogin: "truongcuda",
+      password: "lequocdat1234"
+    })
+    expect(res.statusCode).toBe(200);
+  })
+})
+
+// Dang nhap voi mat khau sai
 // Boi vi sai mat khau nen se render lai trang login
 describe("Test login wrong password", () => {
   test("It should render page login", async() => {
@@ -54,3 +67,14 @@ describe("Test login with true password", () => {
     expect(res.statusCode).toBe(302); // Khi login dung thi se redirect den trang chu. statuscode = 302
   });
 });
+
+
+// TEST DASHBOARD
+
+// kiem tra user chua dang nhap truy cap vao /class
+describe("Test the class path", () => {
+  test("It should response 200", async() => {
+    const response = await request(app).get("/class/");
+    expect(response.status).toBe(302); // redirect to login
+  })
+})

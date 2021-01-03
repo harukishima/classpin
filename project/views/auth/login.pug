@@ -99,7 +99,7 @@ head
   meta(name='viewport', content='width=device-width, initial-scale=1.0')
   script(src='https://kit.fontawesome.com/64d58efce2.js', crossorigin='anonymous')
   link(rel='stylesheet', href='/css/loginsignup.css')
-  title Sign in &amp; Sign up Form
+  title CLASSPIN | CLASS OF THE FUTURE
 .container
   .forms-container
     .signin-signup
@@ -107,10 +107,13 @@ head
         h2.title Sign in
         .input-field
           i.fas.fa-user
-          input(type='text', placeholder='Username', name='namelogin')
+          input(type='text', placeholder='Username', name='namelogin' autofocus)
         .input-field
           i.fas.fa-lock
           input(type='password', placeholder='Password', name='password')
+        if (errors)
+          each error in errors
+            span.text-danger= error
         input.btn.solid(type='submit', value='Login')
         p.social-text Or Sign in with social platforms
         .social-media
@@ -122,14 +125,15 @@ head
             i.fab.fa-google
           a.social-icon(href='#')
             i.fab.fa-linkedin-in
-      form.sign-up-form(method='POST', action='/signup')
+
+      form.sign-up-form(method='POST', action='/signup' id="frmSignup")
         h2.title Sign up
         .input-field
           i.fas.fa-user
-          input(type='text', placeholder='Username', name='namelogin', required)
+          input(type='text', placeholder='Username', name='namelogin' id='namelogin' minlength="8" maxlength="30", required)
         .input-field
           i.fas.fa-signature
-          input(type='text', placeholder='Full Name', name='fullname', required)
+          input(type='text', placeholder='Full Name', name='fullname' id='fullname', required)
         .input-field
           i.fas.fa-envelope
           input(type='email', placeholder='Email', name='email', required)
@@ -138,13 +142,10 @@ head
           input(type='number', placeholder='Phone', name='phone', required)
         .input-field
           i.fas.fa-lock
-          input(type='password', placeholder='Password', name='password1', minlength="8", maxlength="30", required)
+          input#password1(type='password', placeholder='Password', name='password1', minlength="8", maxlength="30", required)
         .input-field
           i.fas.fa-lock
-          input(type='password', placeholder='Password', name='password2', minlength="8", maxlength="30", required)
-        if (errors)
-          each error in errors
-            span.text-danger= error
+          input#password2(type='password', placeholder='Password', name='password2', minlength="8", maxlength="30", required)
         input.btn(type='submit', value='Sign up')
         p.social-text Or Sign up with social platforms
         .social-media
@@ -174,5 +175,62 @@ head
         button#sign-in-btn.btn.transparent
           | Sign in
       img.image(src='/images/register.svg', alt='')
+
+script(src="https://cdn.jsdelivr.net/npm/sweetalert2@10")
+
 script(src='/js/app.js')
+script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', integrity='sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1', crossorigin='anonymous')
+script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM', crossorigin='anonymous')
+
+
+script.
+  const status = '#{status}';
+  if(status === 'success') {
+    Swal.fire({
+      icon: 'success',
+      title: 'Create account successfully',
+    })
+  }
+
+  $('#frmSignup').on('submit', function(e) {
+    e.preventDefault();
+    var namelogin = $('#namelogin').val();
+    var fullname = $('#fullname').val();
+    var password1 = $('#password1').val();
+    var password2 = $('#password2').val();
+    console.log(password1);
+    console.log(namelogin);
+    if(namelogin.indexOf(' ') !== -1) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'invalid data input',
+      })
+      return;
+    }
+
+    if(password1 !== password2) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: "Password did'nt match.",
+      })
+      return;
+    }
+
+    $.getJSON(`/signup/is-available/?user=${namelogin}`, function(data) {
+      console.log(data);
+      if(data === false) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'User already exist.',
+        })
+        return;
+      }
+
+      $('#frmSignup').off('submit').submit();
+    })
+  })
 

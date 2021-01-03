@@ -53,6 +53,7 @@ router.post('/:id/exercise/:idex/publish', teacherMiddleware.requireTeacher, exe
 router.get('/:id/student', studentMiddleware.requireStudent, overviewActive.localsActive, controller.studentClass);
 router.get('/:id/student/exercise', studentMiddleware.requireStudent, exerciseActive.localsActive, controller.studentAllExercise);
 router.get('/:id/student/members', studentMiddleware.requireStudent, memberActive.localsActive, controller.allStudentMembers);
-
+router.post('/:id/student/exercise/dotest', studentMiddleware.requireStudent, exerciseActive.localsActive, controller.dotest)
+router.post('/:id/student/exercise/dotest/submit', studentMiddleware.requireStudent, exerciseActive.localsActive, controller.postDoTest);
 
 module.exports = router;

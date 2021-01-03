@@ -332,6 +332,9 @@ module.exports.studentClass = async (req, res) => {
 
 module.exports.studentAllExercise = async (req, res) => {
   const allExercises = await Exercise.find({_id: {$in : res.locals.classroom.listExam}, status: "published"}).sort({dateCreated: -1});
+  for(var i of allExercises) {
+    i.date = moment(i.dateEnd);
+  }
   res.render('class/studentExercise', {
     allExercises : allExercises
   })
@@ -345,4 +348,27 @@ module.exports.allStudentMembers = async (req, res) => {
   res.render('class/allStudentMembers', {
     allMembers : allMembers,
   });
+}
+
+module.exports.dotest = async (req, res) => {
+  const idEx = req.body.idEx;
+  const exercise = await Exercise.findOne({_id: idEx});
+  const questions = await Question.find({_id : {$in : exercise.listQuestion}});
+  console.log(exercise);
+  res.render('class/dotest', {
+    exercise: exercise,
+    questions: questions,
+  })
+}
+
+module.exports.postDoTest = async (req, res) => {
+  console.log(req.body);
+  const exercise = await Exercise.findOne({_id: req.body.idEx});
+  const questions = await Question.find({_id : {$in : exercise.listQuestion}});
+  console.log(questions);
+  var x = 0; //count
+
+  for(var i of questions) {
+    
+  }
 }
