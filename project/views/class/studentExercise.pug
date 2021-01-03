@@ -9,13 +9,15 @@ block content
           i.fas.fa-list.mr-2
           | Exercises
         hr.mb-4
+        form#frmDoTest(action="/class/" + classroom._id + "/student/exercise/dotest", method="POST")
+          input#txtEx(type="hidden", name="idEx")
         if(allExercises.length)
           each exercise in allExercises
             .card.mb-3
               .card-header.d-flex.justify-content-between.flip
                 .title
                   h5.card-title #{exercise.title}
-                  //h6.font-weight-light  #{exercise.dateEnd.fromNow()}
+                  h6.font-weight-light #{exercise.date.fromNow()}
                 .pencil
                   a.btn.btn-primary(href="#")
                     i.fas.fa-pencil-alt
@@ -23,7 +25,8 @@ block content
                 p.card-text Description: #{exercise.description}
                 p.card-text Date begin: #{exercise.dateBegin.toUTCString()}
                 p.card-text Date end: #{exercise.dateEnd.toUTCString()}
-                a.btn.btn-primary(href="#") Take this exercise
+                p.card-text Time: #{exercise.time} minutes
+                a.btn.btn-primary.btnDoTest(href="javascript: $('#frmDoTest').submit(); ;", data-id=exercise._id) Take this exam
                 
         else
           .text-center
@@ -36,3 +39,24 @@ block js
         $(this).parent().children('.panel').slideToggle("slow");
       });
     });
+
+    $('.btnDoTest').on('click', function() {
+      $('#txtEx').val($(this).data('id'));
+    })
+
+    $('#frmDoTest').on('submit', function(e) {
+      e.preventDefault();
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You can only do this exercise once!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, do it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $('#frmDoTest').off('submit').submit();
+        }
+      })
+    })

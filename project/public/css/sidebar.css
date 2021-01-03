@@ -144,5 +144,34 @@ ul ul a{
 	vertical-align: middle;
 }
 
+.heading-secondary {
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: inline-block;
+  letter-spacing: 0.5rem;
+  cursor: pointer;
+  background-image: linear-gradient(to right, #8e9efc, #1c3eff);
+  color: transparent;
+  margin-bottom: 2rem;
+  -webkit-background-clip: text;
+  transition: all .2s; }
+  .heading-secondary:hover {
+    transform: skewY(5deg) scale(1.1);
+    text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }
 
 
+#timer-icon{
+	font-size: 25px;
+	margin-right: 0.75rem;
+	display: inline-block;
+}
+
+#timer{
+	display: inline-block;
+}
+
+#frmtestsubmit{
+	height: 50vh;
+	overflow-y: scroll;
+}

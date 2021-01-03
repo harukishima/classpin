@@ -43,6 +43,16 @@ module.exports.postSignup = async (req, res) => {
   // add user role
   var acl = new node_acl(new node_acl.mongodbBackend(mongoose.connection.db, 'acl_'));
   acl.addUserRoles(newUser._id.toString(), "user");
+  var msg = encodeURIComponent('success');
+  res.redirect('/login/?status=' + msg);
+}
 
-  res.redirect('/login');
+module.exports.isAvailable = async (req, res) => {
+  const namelogin = req.query.user;
+  const user = await User.findOne({namelogin : namelogin});
+  if(user) {
+    res.json(false);
+  } else {
+    res.json(true);
+  }
 }

@@ -51,7 +51,6 @@ function initRoutes(acl) {
   });
   
   
-  
   app.get('/about', (req, res) => {
     throw new Error('ABOUT BROKEN');
   })

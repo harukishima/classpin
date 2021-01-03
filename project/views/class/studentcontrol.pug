@@ -1,115 +1,116 @@
-doctype html
-head
-  title CLASSPIN | CLASS OF THE FUTURE
-  meta(name='viewport', content='width=device-width, initial-scale=1')
-  link(rel="preconnect" href="https://fonts.gstatic.com")
-  link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap")
-  link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
-  link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css')
-  link(rel="stylesheet", href="/css/sidebar.css")
-  style.
-    body {
-      background-color: #ffffff;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 200 200'%3E%3Cpolygon fill='%23DCEFFA' points='100 0 0 100 100 100 100 200 200 100 200 0'/%3E%3C/svg%3E");
-    }
-  block head
-.wrapper
-  nav#sidebar
-    .sidebar-header
-      h3 #{classroom.classname}
-      p.text-white #{teacher.name}
-      span ID: #{classroom.joinId}
-    ul.lisst-unstyled.components
-      li
-        if (Active == "overview")
-          a.active(href='#') 
-            i.fas.fa-home.mr-3
-            |   Overview
-        else
-          a(href='#')
-            i.fas.fa-home.mr-3
-            |   Overview
-      li
-        if (Active == "exercise")
-          a.active(href='/class/' + classroom._id + '/student/exercise')
-            i.fas.fa-book.mr-3
-            |   Exercises
-        else
-          a(href='/class/' + classroom._id + '/student/exercise')
-            i.fas.fa-book.mr-3
-            |   Exercises
-      li
-        if (Active == "notify")
-          a.active(href='#') 
-            i.fas.fa-bell.mr-3
-            |   Notifications
-        else
-          a(href='#')
-            i.fas.fa-bell.mr-3
-            |   Notifications
-      li
-        if (Active == "member")
-          a.active(href='/class/' + classroom._id + '/student/members')
-            i.fas.fa-users.mr-2
-            |   Members
-        else
-          a(href='/class/' + classroom._id + '/student/members')
-            i.fas.fa-users.mr-2
-            |   Members
-      li
-        if (Active == "document")
-          a.active(href='#') 
-            i.far.fa-file-alt.mr-3
-            |   Documents
-        else
-          a(href='#')
-            i.far.fa-file-alt.mr-3
-            |   Documents
-    .text-center
-      a.btn.btn-danger.p-2(href="#") 
-        i.fas.fa-sign-out-alt
-        |   Leave class
-  //.background-blue
-  .scrollable
-    #content
-      nav.navbar.navbar-expand-lg.navbar-light(style="background-color: :#3498db;")
-        .container-fluid(style="background-color: :#3498db")
-          button#sidebarCollapse.btn.btn-secondary(type='button')
-            i.fas.fa-align-left
-          a.btn.btn-secondary(href="/class") Return to dashboard
-      br
-      block content
-    
-script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
-script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', integrity='sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1', crossorigin='anonymous')
-script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM', crossorigin='anonymous')
-script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js')
-script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js')
-script(src='https://cdn.jsdelivr.net/npm/sweetalert2@10')
+html
+  head
+    title CLASSPIN | CLASS OF THE FUTURE
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel="preconnect" href="https://fonts.gstatic.com")
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap")
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css')
+    link(rel="stylesheet", href="/css/sidebar.css")
+    style.
+      body {
+        background-color: #ffffff;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 200 200'%3E%3Cpolygon fill='%23DCEFFA' points='100 0 0 100 100 100 100 200 200 100 200 0'/%3E%3C/svg%3E");
+      }
+    block head
+  body
+    .wrapper
+      nav#sidebar
+        .sidebar-header
+          h3 #{classroom.classname}
+          p.text-white #{teacher.name}
+          span ID: #{classroom.joinId}
+        ul.lisst-unstyled.components
+          li
+            if (Active == "overview")
+              a.active(href='#') 
+                i.fas.fa-home.mr-3
+                |   Overview
+            else
+              a(href='#')
+                i.fas.fa-home.mr-3
+                |   Overview
+          li
+            if (Active == "exercise")
+              a.active(href='/class/' + classroom._id + '/student/exercise')
+                i.fas.fa-book.mr-3
+                |   Exercises
+            else
+              a(href='/class/' + classroom._id + '/student/exercise')
+                i.fas.fa-book.mr-3
+                |   Exercises
+          li
+            if (Active == "notify")
+              a.active(href='#') 
+                i.fas.fa-bell.mr-3
+                |   Notifications
+            else
+              a(href='#')
+                i.fas.fa-bell.mr-3
+                |   Notifications
+          li
+            if (Active == "member")
+              a.active(href='/class/' + classroom._id + '/student/members')
+                i.fas.fa-users.mr-2
+                |   Members
+            else
+              a(href='/class/' + classroom._id + '/student/members')
+                i.fas.fa-users.mr-2
+                |   Members
+          li
+            if (Active == "document")
+              a.active(href='#') 
+                i.far.fa-file-alt.mr-3
+                |   Documents
+            else
+              a(href='#')
+                i.far.fa-file-alt.mr-3
+                |   Documents
+        .text-center
+          a.btn.btn-danger.p-2(href="#") 
+            i.fas.fa-sign-out-alt
+            |   Leave class
+      //.background-blue
+      .scrollable
+        #content
+          nav.navbar.navbar-expand-lg.navbar-light(style="background-color: :#3498db;")
+            .container-fluid(style="background-color: :#3498db")
+              button#sidebarCollapse.btn.btn-secondary(type='button')
+                i.fas.fa-align-left
+              a.btn.btn-secondary(href="/class") Return to dashboard
+          br
+          block content
+        
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js', integrity='sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1', crossorigin='anonymous')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM', crossorigin='anonymous')
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js')
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js')
+    script(src='https://cdn.jsdelivr.net/npm/sweetalert2@10')
 
 
-script.
-  $(document).ready(function () {
-    $('#sidebarCollapse').on('click', function () {
-      $('#sidebar').toggleClass('active');
-    });
-  });
+    script.
+      $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+          $('#sidebar').toggleClass('active');
+        });
+      });
 
-  var enroll = "#{passedVariable}";
-  var classname = "#{classroom.classname}";
-  if(enroll === "success") {
-    Swal.fire({
-      title: 'Welcome to ' + classname,
-      width: 600,
-      padding: '3em',
-      background: '#fff url(https://sweetalert2.github.io/images/trees.png)',
-      backdrop: `
-        rgba(0,0,123,0.4)
-        url("https://sweetalert2.github.io/images/nyan-cat.gif")
-        left top
-        no-repeat
-      `
-    })
-  }
+      var enroll = "#{passedVariable}";
+      var classname = "#{classroom.classname}";
+      if(enroll === "success") {
+        Swal.fire({
+          title: 'Welcome to ' + classname,
+          width: 600,
+          padding: '3em',
+          background: '#fff url(https://sweetalert2.github.io/images/trees.png)',
+          backdrop: `
+            rgba(0,0,123,0.4)
+            url("https://sweetalert2.github.io/images/nyan-cat.gif")
+            left top
+            no-repeat
+          `
+        })
+      }
 
-block js
+    block js
