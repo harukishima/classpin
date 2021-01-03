@@ -1,5 +1,5 @@
 const express = require('express');
-var multer  = require('multer')
+var multer = require('multer')
 
 const router = express.Router();
 const controller = require('../controller/class.controller');
@@ -22,32 +22,41 @@ var storage = multer.diskStorage({
   }
 });
 
-var upload = multer({storage: storage});
+var upload = multer({ storage: storage });
+
 
 router.get('/', controller.index);
 
+//create class
 router.get('/create', controller.create);
 router.post('/create', controller.postCreate);
 
+
+//enroll class
 router.get('/enroll', controller.enroll);
 router.post('/enroll', controller.postEnrollClass);
 
+//search for class
 router.get('/search', controller.search);
 router.get('/:id', overviewActive.localsActive, controller.classControl);
 
+//delete class
 router.get('/delete/:id', teacherMiddleware.requireTeacher, controller.getDelete);
-router.post('/delete/:id',teacherMiddleware.requireTeacher, controller.postDelete);
+router.post('/delete/:id', teacherMiddleware.requireTeacher, controller.postDelete);
 
-router.get('/:id/members',teacherMiddleware.requireTeacher, memberActive.localsActive, controller.allMembers);
+
+//class management
+router.get('/:id/members', teacherMiddleware.requireTeacher, memberActive.localsActive, controller.allMembers);
 router.get('/:id/exercise', teacherMiddleware.requireTeacher, exerciseActive.localsActive, controller.exercise);
 router.get('/:id/exercise/create', teacherMiddleware.requireTeacher, exerciseActive.localsActive, controller.createExercise);
-router.post('/:id/exercise/create', teacherMiddleware.requireTeacher, exerciseActive.localsActive, upload.single('pdf') , controller.postCreateEx);
+router.post('/:id/exercise/create', teacherMiddleware.requireTeacher, exerciseActive.localsActive, upload.single('pdf'), controller.postCreateEx);
 router.get('/:id/exercise/:idex', teacherMiddleware.requireTeacher, exerciseActive.localsActive, controller.allQuestion);
 router.get('/:id/exercise/:idex/fileExam', teacherMiddleware.requireTeacher, exerciseActive.localsActive, controller.reviewPDF);
 router.get('/:id/exercise/:idex/addQuestion', teacherMiddleware.requireTeacher, exerciseActive.localsActive, controller.addQuestion);
-router.post('/:id/exercise/:idex/addQuestion',teacherMiddleware.requireTeacher, exerciseActive.localsActive, controller.postNumberQuestion);
+router.post('/:id/exercise/:idex/addQuestion', teacherMiddleware.requireTeacher, exerciseActive.localsActive, controller.postNumberQuestion);
 router.post('/:id/exercise/:idex/postCreateQuestion', teacherMiddleware.requireTeacher, exerciseActive.localsActive, controller.postCreateQuestion);
 router.post('/:id/exercise/:idex/publish', teacherMiddleware.requireTeacher, exerciseActive.localsActive, controller.publishEx);
+
 
 // router student
 router.get('/:id/student', studentMiddleware.requireStudent, overviewActive.localsActive, controller.studentClass);
