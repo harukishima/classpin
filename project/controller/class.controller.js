@@ -56,6 +56,16 @@ module.exports.publishEx = async (req, res) => {
   res.redirect('/class/' + res.locals.classroom._id + '/exercise/');
 }
 
+module.exports.create = (req, res) => {
+  res.render('class/create');
+}
+
+module.exports.enroll = (req, res) => {
+  res.render('class/enroll', {
+
+  });
+}
+
 module.exports.index = async (req, res) => {
   var passedVariable = req.query.status;
   // Tim lop hoc cua user
@@ -81,16 +91,6 @@ module.exports.index = async (req, res) => {
 
 }
 
-module.exports.create = (req, res) => {
-  res.render('class/create');
-}
-
-module.exports.enroll = (req, res) => {
-  res.render('class/enroll', {
-
-  });
-}
-
 module.exports.postCreate = async (req, res) => {
   try {
     const user = await User.findById({ _id: req.signedCookies.userId });
@@ -110,28 +110,6 @@ module.exports.postCreate = async (req, res) => {
   } catch (err) {
     var string = encodeURIComponent("fail");
     res.redirect('/class' + '/?status=' + string);
-  }
-};
-
-module.exports.classControl = async (req, res) => {
-  var passedVariable = req.query.enroll;
-  const classroom = await Classroom.findById({ _id: req.params.id });
-  const userId = mongoose.Types.ObjectId(req.signedCookies.userId);
-
-  if (classroom.listusers.indexOf(userId) === -1) {
-    var string = encodeURIComponent("noPermission");
-    res.redirect('/class/' + '?status=' + string);
-  }
-
-  const teacher = await User.findById({ _id: classroom.teacher });
-  console.log(userId);
-  console.log(teacher);
-  if (teacher._id.toString() === userId.toString()) {
-    res.render('class/classcontrol', {
-      classroom: classroom,
-      teacher: teacher,
-      passedVariable: passedVariable,
-    });
   }
 };
 
@@ -156,6 +134,30 @@ module.exports.search = async (req, res) => {
     value: q,
   });
 };
+
+module.exports.classControl = async (req, res) => {
+  var passedVariable = req.query.enroll;
+  const classroom = await Classroom.findById({ _id: req.params.id });
+  const userId = mongoose.Types.ObjectId(req.signedCookies.userId);
+
+  if (classroom.listusers.indexOf(userId) === -1) {
+    var string = encodeURIComponent("noPermission");
+    res.redirect('/class/' + '?status=' + string);
+  }
+
+  const teacher = await User.findById({ _id: classroom.teacher });
+  console.log(userId);
+  console.log(teacher);
+  if (teacher._id.toString() === userId.toString()) {
+    res.render('class/classcontrol', {
+      classroom: classroom,
+      teacher: teacher,
+      passedVariable: passedVariable,
+    });
+  }
+};
+
+
 
 //controller student
 
