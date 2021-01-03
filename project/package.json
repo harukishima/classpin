@@ -7,8 +7,8 @@
     "start": "nodemon --inspect index",
     "test": "jest --forceExit"
   },
-  "jest" : {
-    "testEnvironment" : "node"
+  "jest": {
+    "testEnvironment": "node"
   },
   "author": "",
   "license": "ISC",
