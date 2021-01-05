@@ -57,7 +57,6 @@ router.post('/:id/exercise/:idex/addQuestion', teacherMiddleware.requireTeacher,
 router.post('/:id/exercise/:idex/postCreateQuestion', teacherMiddleware.requireTeacher, exerciseActive.localsActive, controller.postCreateQuestion);
 router.post('/:id/exercise/:idex/publish', teacherMiddleware.requireTeacher, exerciseActive.localsActive, controller.publishEx);
 
-
 // router student
 router.get('/:id/student', studentMiddleware.requireStudent, overviewActive.localsActive, controller.studentClass);
 router.get('/:id/student/exercise', studentMiddleware.requireStudent, exerciseActive.localsActive, controller.studentAllExercise);
