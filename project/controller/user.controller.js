@@ -1,21 +1,6 @@
 const { Mongoose } = require('mongoose');
 const User = require('../models/users.model');
 
-module.exports.profile = async (req, res) => {
-  var passedVariable = req.query.valid;
-  const user = await User.findById({ _id: req.params.id });
-  var auth = true;
-  if (user._id.toString() !== req.signedCookies.userId) {
-    auth = false;
-  }
-  res.render('users/profile', {
-    matchedUser: user,
-    passedVariable: passedVariable,
-    auth: auth,
-  });
-}
-
-
 module.exports.updateProfile = (req, res) => {
   res.render('users/updateprofile', {
   });
@@ -45,5 +30,22 @@ module.exports.postUpdateProfile = async (req, res) => {
     res.redirect('/users/' + user._id + '/?valid=' + string);
   }
 }
+
+module.exports.profile = async (req, res) => {
+  var passedVariable = req.query.valid;
+  const user = await User.findById({ _id: req.params.id });
+  var auth = true;
+  if (user._id.toString() !== req.signedCookies.userId) {
+    auth = false;
+  }
+  res.render('users/profile', {
+    matchedUser: user,
+    passedVariable: passedVariable,
+    auth: auth,
+  });
+}
+
+
+
 
 

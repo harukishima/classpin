@@ -4,12 +4,12 @@ const Schema = mongoose.Schema;
 
 const schema = new Schema({
   _id: mongoose.ObjectId,
-  title : String,
+  title: String,
   listQuestion: Array,
   description: String,
-  dateBegin: { type: Date, default: Date.now()},
+  dateBegin: { type: Date, default: Date.now() },
   examFile: String,
-  dateCreated: { type: Date, default: Date.now()},
+  dateCreated: { type: Date, default: Date.now() },
   dateEnd: Date,
   time: Number,
   status: String,

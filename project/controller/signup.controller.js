@@ -1,6 +1,6 @@
 const User = require('../models/users.model');
 const bcrypt = require('bcrypt');
-const mongoose = require('mongoose');   
+const mongoose = require('mongoose');
 const node_acl = require('acl');
 
 module.exports.index = (req, res) => {
@@ -8,15 +8,15 @@ module.exports.index = (req, res) => {
 };
 
 module.exports.postSignup = async (req, res) => {
-  const userExisted = await User.findOne({namelogin: req.body.namelogin});
-  if(userExisted) {
+  const userExisted = await User.findOne({ namelogin: req.body.namelogin });
+  if (userExisted) {
     res.render('auth/login', {
       errors: ["Username already exists!"]
     });
     return;
   }
 
-  if(req.body.password1 !== req.body.password2) {
+  if (req.body.password1 !== req.body.password2) {
     res.render('auth/login', {
       errors: ["Password did'nt match!"]
     });
@@ -33,8 +33,8 @@ module.exports.postSignup = async (req, res) => {
     phone: req.body.phone,
   });
 
-  newUser.save(function(err) {
-    if(err) {
+  newUser.save(function (err) {
+    if (err) {
       return handleError(err);
     }
     //save
@@ -49,8 +49,8 @@ module.exports.postSignup = async (req, res) => {
 
 module.exports.isAvailable = async (req, res) => {
   const namelogin = req.query.user;
-  const user = await User.findOne({namelogin : namelogin});
-  if(user) {
+  const user = await User.findOne({ namelogin: namelogin });
+  if (user) {
     res.json(false);
   } else {
     res.json(true);
