@@ -1,15 +1,6 @@
 const User = require("../models/users.model");
 const bcrypt = require('bcrypt');
 
-module.exports.login = (req, res) => {
-  if (req.signedCookies.userId) {
-    res.redirect('/');
-  }
-  const status = req.query.status;
-  res.render('auth/login', {
-    status: status,
-  });
-}
 
 module.exports.postlogin = async (req, res) => {
   var namelogin = req.body.namelogin;
@@ -37,4 +28,14 @@ module.exports.postlogin = async (req, res) => {
 
   res.cookie('userId', user._id, { signed: true });
   res.redirect('/');
+}
+
+module.exports.login = (req, res) => {
+  if (req.signedCookies.userId) {
+    res.redirect('/');
+  }
+  const status = req.query.status;
+  res.render('auth/login', {
+    status: status,
+  });
 }

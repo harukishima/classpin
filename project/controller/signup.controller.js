@@ -7,6 +7,16 @@ module.exports.index = (req, res) => {
   res.render('auth/register', {});
 };
 
+module.exports.isAvailable = async (req, res) => {
+  const namelogin = req.query.user;
+  const user = await User.findOne({ namelogin: namelogin });
+  if (user) {
+    res.json(false);
+  } else {
+    res.json(true);
+  }
+}
+
 module.exports.postSignup = async (req, res) => {
   const userExisted = await User.findOne({ namelogin: req.body.namelogin });
   if (userExisted) {
@@ -47,12 +57,3 @@ module.exports.postSignup = async (req, res) => {
   res.redirect('/login/?status=' + msg);
 }
 
-module.exports.isAvailable = async (req, res) => {
-  const namelogin = req.query.user;
-  const user = await User.findOne({ namelogin: namelogin });
-  if (user) {
-    res.json(false);
-  } else {
-    res.json(true);
-  }
-}
