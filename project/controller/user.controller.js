@@ -7,11 +7,11 @@ module.exports.updateProfile = (req, res) => {
 }
 
 module.exports.postUpdateProfile = async (req, res) => {
-  const user = await User.findById({ _id: userId });
   var userId = req.params.id;
   var name = req.body.name;
   var phone = req.body.phone;
   var email = req.body.email;
+  const user = await User.findById({ _id: userId });
   if (user._id.toString() !== req.signedCookies.userId) {
     throw Error();
   }
